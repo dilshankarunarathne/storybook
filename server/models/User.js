@@ -7,7 +7,7 @@ const User = sequelize.define('User', {
     allowNull: false,
     primaryKey: true,
   },
-  hashedPassword: {
+  hashed_password: {
     type: DataTypes.STRING(64),
     allowNull: false,
   },
@@ -19,11 +19,11 @@ const User = sequelize.define('User', {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
-  firstName: {
+  first_name: {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
-  lastName: {
+  last_name: {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
@@ -34,10 +34,10 @@ const User = sequelize.define('User', {
   bio: {
     type: DataTypes.STRING(150),
   },
-  profilePicture: {
+  profile_picture: {
     type: DataTypes.BLOB,
   },
-  postsCount: {
+  posts_count: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
