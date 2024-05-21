@@ -14,8 +14,8 @@ The group members are:
 - [Udari]()
 - [Tharuka]()
 - [Madhawa]()
-- [member]()
-- [member]()
+- [Abiram]()
+- [Sakaniya]()
 
 ## License
 
