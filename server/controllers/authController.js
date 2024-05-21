@@ -10,15 +10,23 @@ const router = express.Router();
 const upload = multer();
 
 router.post('/signup', upload.none(), async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email, firstName, lastName, dob } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).send('Username and password are required');
+  if (!username || !password || !email || !firstName || !lastName || !dob) {
+    return res.status(400).send('All fields are required');
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await User.create({ username, password: hashedPassword });
-  res.sendStatus(201);
+  const user = await User.create({
+    username,
+    hashedPassword,
+    email,
+    firstName,
+    lastName,
+    dob
+  });
+
+  res.status(201).send('User registered successfully');
 });
 
 router.post('/login', upload.none(), async (req, res) => {
