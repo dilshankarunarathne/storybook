@@ -10,19 +10,21 @@ const router = express.Router();
 const upload = multer();
 
 router.post('/signup', upload.none(), async (req, res) => {
-  const { username, password, email, firstName, lastName, dob } = req.body;
+  const { username, password, email, first_name, last_name, dob } = req.body;
 
-  if (!username || !password || !email || !firstName || !lastName || !dob) {
+  if (!username || !password || !email || !first_name || !last_name || !dob) {
+    console.log(username, password, email, first_name, last_name, dob); // TODO remove
+
     return res.status(400).send('All fields are required');
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashed_password = await bcrypt.hash(password, 10);
   const user = await User.create({
     username,
-    hashedPassword,
+    hashed_password,
     email,
-    firstName,
-    lastName,
+    first_name,
+    last_name,
     dob
   });
 
