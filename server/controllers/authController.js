@@ -13,8 +13,6 @@ router.post('/signup', upload.none(), async (req, res) => {
   const { username, password, email, first_name, last_name, dob } = req.body;
 
   if (!username || !password || !email || !first_name || !last_name || !dob) {
-    console.log(username, password, email, first_name, last_name, dob); // TODO remove
-
     return res.status(400).send('All fields are required');
   }
 
@@ -33,7 +31,7 @@ router.post('/signup', upload.none(), async (req, res) => {
 
 router.post('/login', upload.none(), async (req, res) => {
   const user = await User.findOne({ where: { username: req.body.username } });
-  if (!user || !await bcrypt.compare(req.body.password, user.hashedPassword)) {
+  if (!user || !await bcrypt.compare(req.body.password, user.hashed_password)) {
     return res.sendStatus(401);
   }
   const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
