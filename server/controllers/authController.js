@@ -16,15 +16,21 @@ router.post('/signup', upload.none(), async (req, res) => {
     return res.status(400).send('All fields are required');
   }
 
+  const verificationCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
   const hashed_password = await bcrypt.hash(password, 10);
+
   const user = await User.create({
     username,
     hashed_password,
     email,
     first_name,
     last_name,
-    dob
+    dob,
+    verificationCode
   });
+
+  // TODO: send verification email
 
   res.status(201).send('User registered successfully');
 });
