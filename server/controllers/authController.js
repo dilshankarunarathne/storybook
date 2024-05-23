@@ -37,11 +37,35 @@ router.post('/signup', upload.none(), async (req, res) => {
 
 router.post('/login', upload.none(), async (req, res) => {
   const user = await User.findOne({ where: { username: req.body.username } });
+
   if (!user || !await bcrypt.compare(req.body.password, user.hashed_password)) {
     return res.sendStatus(401);
   }
+
   const token = jwt.sign({ id: user.id, username: user.username }, process.env.SECRET_KEY);
+
   res.send({ token });
+});
+
+router.post('/verify', upload.none(), async (req, res) => {
+  const { username, code } = req.body;
+
+  const user = await User.findOne({ where: { username } });
+
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  if (user.verificationCode !== code) {
+    return res.status(403).send('Invalid verification code');
+  }
+
+  user.confirmed = true;
+  user.verificationCode = null;
+
+  await user.save();
+
+  res.status(200).send('User confirmed successfully');
 });
 
 module.exports = router;
