@@ -9,8 +9,8 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
-router.get('/', async (req, res) => {
-    const { post } = req.query;
+router.get('/', upload.none(), authMiddleware, async (req, res) => {
+    const { post } = req.body;
 
     if (!post) {
         return res.status(400).send('Post id is required');
@@ -60,7 +60,11 @@ router.put('/', upload.none(), authMiddleware, async (req, res) => {
         return res.status(400).send('Comment id is required and you must be logged in');
     }
 
-    const comment = await Comment.findOne({ where: { id, user } });
+    if (!text) {
+        return res.status(400).send('Text is required');
+    }
+
+    const comment = await Comment.findOne({ where: { comment_id: id, user } });
 
     if (!comment) {
         return res.status(404).send('Comment not found');
