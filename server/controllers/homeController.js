@@ -24,6 +24,18 @@ router.post('/', authMiddleware, async (req, res) => {
     res.json(posts);
 });
 
+router.get('/post', upload.none(), async (req, res) => {
+    const { id } = req.body;
+
+    const post = await Post.findByPk(id);
+
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+
+    res.json(post);
+});
+
 router.post('/post', upload.none(), authMiddleware, async (req, res) => {
     const { text, image } = req.body;
 
