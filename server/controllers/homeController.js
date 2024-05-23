@@ -43,13 +43,13 @@ router.post('/post', upload.none(), authMiddleware, async (req, res) => {
 });
 
 router.put('/post', upload.none(), authMiddleware, async (req, res) => {
-    const { post_id, text, image } = req.body;
+    const { id, text, image } = req.body;
 
-    if (!post_id) {
+    if (!id) {
         return res.status(400).send('Post id is required');
     }
 
-    const post = await Post.findByPk(post_id);
+    const post = await Post.findByPk(id);
 
     if (!post) {
         return res.status(404).send('Post not found');
