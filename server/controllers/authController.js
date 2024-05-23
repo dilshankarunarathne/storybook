@@ -48,16 +48,16 @@ router.post('/login', upload.none(), async (req, res) => {
 });
 
 router.post('/verify', upload.none(), async (req, res) => {
-  const { username, code } = req.body;
+  const code = req.query.code;
 
-  const user = await User.findOne({ where: { username } });
-
-  if (!user) {
-    return res.status(404).send('User not found');
+  if (!code) {
+    return res.status(400).send('Verification code is required');
   }
 
-  if (user.verificationCode !== code) {
-    return res.status(403).send('Invalid verification code');
+  const user = await User.findOne({ where: { verificationCode: code } });
+
+  if (!user) {
+    return res.status(404).send('Invalid verification code');
   }
 
   user.confirmed = true;
