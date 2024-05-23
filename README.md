@@ -5,6 +5,10 @@
 
 Storybook is a social media web application built as a group project for CS3122 - Advanced Database Management Systems. This project demonstrates the application of database concepts and technologies in a real-world context. Users can register, create profiles, share posts (text and optional images), comment on other users' posts, and like posts. The system automatically deletes posts after a set timeframe. 
 
+## API Documentation
+
+The API documentation is available at [Postman](https://www.postman.com/karunarathne/workspace/storybook/overview)
+
 ## Contributing
 
 If you'd like to contribute to this project, please check the contribution guidelines for more information.  
