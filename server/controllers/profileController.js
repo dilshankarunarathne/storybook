@@ -24,7 +24,7 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
   res.json(user);
 });
 
-router.put('/profile', upload.none(), authMiddleware, async (req, res) => {
+router.put('/', upload.none(), authMiddleware, async (req, res) => {
   const { first_name, last_name, dob, bio, profile_picture } = req.body;
   const user = req.user.username;
 
