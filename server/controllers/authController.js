@@ -34,7 +34,7 @@ router.post('/login', upload.none(), async (req, res) => {
   if (!user || !await bcrypt.compare(req.body.password, user.hashed_password)) {
     return res.sendStatus(401);
   }
-  const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+  const token = jwt.sign({ id: user.id, username: user.username }, process.env.SECRET_KEY);
   res.send({ token });
 });
 
