@@ -2,6 +2,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const Post = require('../models/Post');
 
 const express = require('express');
+const {Op} = require("sequelize");
 
 const router = express.Router();
 
