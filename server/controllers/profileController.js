@@ -24,4 +24,39 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
   res.json(user);
 });
 
+router.put('/profile', upload.none(), authMiddleware, async (req, res) => {
+  const { first_name, last_name, dob, bio, profile_picture } = req.body;
+  const user = req.user.username;
+
+  const userRecord = await User.findOne({ where: { username: user } });
+
+  if (!userRecord) {
+    return res.status(404).send('User not found');
+  }
+
+  if (first_name) {
+    userRecord.first_name = first_name;
+  }
+
+  if (last_name) {
+    userRecord.last_name = last_name;
+  }
+
+  if (dob) {
+    userRecord.dob = dob;
+  }
+
+  if (bio) {
+    userRecord.bio = bio;
+  }
+
+  if (profile_picture) {
+    userRecord.profile_picture = profile_picture;
+  }
+
+  await userRecord.save();
+
+  res.status(200).send('Profile updated successfully');
+});
+
 module.exports = router;
