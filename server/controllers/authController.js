@@ -99,7 +99,7 @@ router.get('/forgot', upload.none(), async (req, res) => {
 
   sendEmail(
       user.email,
-      'Please verify you account',
+      'Reset your password',
       updatedHtmlContent
   );
 
