@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavBar } from '../Components/Navigation/NavBar'
+import LoginSignup from '../Components/LoginSignup/LoginSignup'
 
 export const Home = () => {
   return (
-    <NavBar/>
+    <LoginSignup/>
   )
 }
