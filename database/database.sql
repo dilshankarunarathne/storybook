@@ -38,13 +38,6 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`comment_id`, `post`, `user`, `text`, `created`, `last_modified`) VALUES
-(2, 3, 'test', 'Here, I am commenting on my own post!\nP.S. I edited this comment!', '2024-05-23 14:01:53', '2024-05-23 14:12:15');
-
 -- --------------------------------------------------------
 
 --
@@ -63,13 +56,6 @@ CREATE TABLE IF NOT EXISTS `post` (
   `likes_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `post`
---
-
-INSERT INTO `post` (`post_id`, `user`, `text`, `image`, `created`, `last_modified`, `comments_count`, `likes_count`) VALUES
-(2, 'test', 'This post was updated', NULL, '2024-05-23 13:21:49', '2024-05-23 13:22:29', 0, 0);
 
 -- --------------------------------------------------------
 
