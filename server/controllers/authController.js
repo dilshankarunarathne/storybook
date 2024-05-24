@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 const User = require('../models/User');
 const sendEmail = require("../middleware/mailer");
@@ -91,12 +93,15 @@ router.get('/forgot', upload.none(), async (req, res) => {
 
   await user.save();
 
-  // TODO: Send verification code to user via email
-  // sendEmail(
-  //     'user@gmail.com',
-  //     'please verify',
-  //     '<b>here is the code...</b>' // forgot-password-mail
-  // );
+  const htmlContent = fs.readFileSync(path.join(__dirname, '../static/forgot-password-mail.html'), 'utf8');
+
+  const updatedHtmlContent = htmlContent.replace('{{verification-code}}', user.verificationCode);
+
+  sendEmail(
+      user.email,
+      'Please verify you account',
+      updatedHtmlContent
+  );
 
   res.status(200).send('Password reset code sent successfully');
 });
