@@ -33,12 +33,15 @@ router.post('/signup', upload.none(), async (req, res) => {
     verificationCode
   });
 
-  // TODO: send verification email
-  // sendEmail(
-  //     'user@gmail.com',
-  //     'please verify',
-  //     '<b>here is the code...</b>' // account-verification-mail
-  // );
+  const htmlContent = fs.readFileSync(path.join(__dirname, '../static/account-verification-mail.html'), 'utf8');
+
+  const updatedHtmlContent = htmlContent.replace('{{verification-code}}', verificationCode);
+
+  sendEmail(
+      user.email,
+      'Please verify',
+      updatedHtmlContent
+  );
 
   res.status(201).send('User registered successfully');
 });
