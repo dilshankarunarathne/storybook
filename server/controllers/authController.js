@@ -35,7 +35,7 @@ router.post('/signup', upload.none(), async (req, res) => {
   // sendEmail(
   //     'user@gmail.com',
   //     'please verify',
-  //     '<b>here is the code...</b>'
+  //     '<b>here is the code...</b>' // account-verification-mail
   // );
 
   res.status(201).send('User registered successfully');
@@ -95,7 +95,7 @@ router.get('/forgot', upload.none(), async (req, res) => {
   // sendEmail(
   //     'user@gmail.com',
   //     'please verify',
-  //     '<b>here is the code...</b>'
+  //     '<b>here is the code...</b>' // forgot-password-mail
   // );
 
   res.status(200).send('Password reset code sent successfully');
