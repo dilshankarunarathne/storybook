@@ -1,7 +1,9 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
+
 require('dotenv').config();
+
 const app = express();
 const port = 3001;
 
@@ -17,7 +19,7 @@ let transporter = nodemailer.createTransport(config);
 
 function sendEmail(to, subject, html, attachments = []) {
     let message = {
-        from: 'dimankaperera@gmail.com', 
+        from: 'maleeshasparrow@gmail.com',
         to: to, 
         subject: subject, 
         html: html, 
@@ -30,7 +32,5 @@ function sendEmail(to, subject, html, attachments = []) {
         console.error(err);
     });
 }
-
-// sendEmail('user.ftp.server@gmail.com', 'You have attended', '<b>You have attended to class...</b>')
 
 module.exports = sendEmail;
