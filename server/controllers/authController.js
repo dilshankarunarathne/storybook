@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
 const User = require('../models/User');
+const sendEmail = require("../middleware/mailer");
 
 const router = express.Router();
 
@@ -31,6 +32,11 @@ router.post('/signup', upload.none(), async (req, res) => {
   });
 
   // TODO: send verification email
+  // sendEmail(
+  //     'user@gmail.com',
+  //     'please verify',
+  //     '<b>here is the code...</b>'
+  // );
 
   res.status(201).send('User registered successfully');
 });
@@ -86,6 +92,11 @@ router.get('/forgot', upload.none(), async (req, res) => {
   await user.save();
 
   // TODO: Send verification code to user via email
+  // sendEmail(
+  //     'user@gmail.com',
+  //     'please verify',
+  //     '<b>here is the code...</b>'
+  // );
 
   res.status(200).send('Password reset code sent successfully');
 });
