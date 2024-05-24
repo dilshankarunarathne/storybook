@@ -1,11 +1,13 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import LoginSignup from './Components/LoginSignup/LoginSignup';
+//import LoginSignup from './Components/LoginSignup/LoginSignup';
+//import { Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+//import HeaderArea from './Components/HeaderArea/HeaderArea';
 
 function App() {
   return (
     <div>
-      <LoginSignup/>
+      <h1>Hello world</h1>
     </div>
   );
 }
