@@ -108,15 +108,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`username`, `hashed_password`, `email`, `verified`, `first_name`, `last_name`, `dob`, `bio`, `profile_picture`, `posts_count`, `confirmed`, `verificationCode`) VALUES
-('test', '$2a$10$JuLhmvyAy36zhMRSVNVr1uxJg62HtELqTb5yxJ.BM5H5rtEkE5UUi', 'test@test.com', 0, 'te', 'st', '1999-12-25', NULL, NULL, 0, 1, NULL),
-('test1', '$2a$10$PXFKY9/.IR.jQqvxbuf/5.mEwjdbgRSy0112s.6siptezu51l6xXa', 'test1@test.com', 0, 'te1', 'st1', '1995-04-16', 'I am a auther. I write novels.', NULL, 0, 1, NULL);
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
