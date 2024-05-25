@@ -19,6 +19,8 @@ export default function Post() {
                 <span className="postText">Hey! Its my first post:) </span>
                 <img className="postImg" src="assets/post1.jpg" alt=""/>
             </div>
+
+            {/*TODO: change the style of buttons */}
             <div className="postBottom">
                 <div className="postBottomLeft">
                 <img className="likeIcon" src="assets/like1.jpg" alt=""/>

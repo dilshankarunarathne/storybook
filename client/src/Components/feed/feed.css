@@ -5,3 +5,10 @@
 .feedWrapper{
     padding: 20px;
 }
+
+.middle {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+}
