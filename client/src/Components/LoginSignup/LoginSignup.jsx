@@ -12,8 +12,8 @@ const LoginSignup = () => {
   return (
     <div className='container'>
       <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div>
+        <h1 className='headerName'>StoryBook</h1>
+        <span className='desc'>Connect with friends and the world around you on StoryBook.</span>
       </div>
         <div className="inputs">
           {action==="Login"?<div></div>:<div className="input">
