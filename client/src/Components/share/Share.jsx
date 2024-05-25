@@ -1,4 +1,4 @@
-import {PermMedia , Label, Room, EmojiEmotions} from "@mui/icons-material"
+import {PermMedia} from "@mui/icons-material"
 
 import "./share.css";
 
