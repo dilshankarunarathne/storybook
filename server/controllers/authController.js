@@ -2,8 +2,11 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 const User = require('../models/User');
+const sendEmail = require("../middleware/mailer");
 
 const router = express.Router();
 
@@ -30,7 +33,15 @@ router.post('/signup', upload.none(), async (req, res) => {
     verificationCode
   });
 
-  // TODO: send verification email
+  const htmlContent = fs.readFileSync(path.join(__dirname, '../static/account-verification-mail.html'), 'utf8');
+
+  const updatedHtmlContent = htmlContent.replace('{{verification-code}}', verificationCode);
+
+  sendEmail(
+      user.email,
+      'Please verify',
+      updatedHtmlContent
+  );
 
   res.status(201).send('User registered successfully');
 });
@@ -47,7 +58,7 @@ router.post('/login', upload.none(), async (req, res) => {
   res.send({ token });
 });
 
-router.post('/verify', upload.none(), async (req, res) => {
+router.get('/verify', upload.none(), async (req, res) => {
   const code = req.query.code;
 
   if (!code) {
@@ -68,7 +79,7 @@ router.post('/verify', upload.none(), async (req, res) => {
   res.status(200).send('User confirmed successfully');
 });
 
-router.get('/forgot', upload.none(), async (req, res) => {
+router.post('/forgot', upload.none(), async (req, res) => {
   const { username } = req.body;
 
   if (!username) {
@@ -85,12 +96,20 @@ router.get('/forgot', upload.none(), async (req, res) => {
 
   await user.save();
 
-  // TODO: Send verification code to user via email
+  const htmlContent = fs.readFileSync(path.join(__dirname, '../static/forgot-password-mail.html'), 'utf8');
+
+  const updatedHtmlContent = htmlContent.replace('{{verification-code}}', user.verificationCode);
+
+  sendEmail(
+      user.email,
+      'Reset your password',
+      updatedHtmlContent
+  );
 
   res.status(200).send('Password reset code sent successfully');
 });
 
-router.post('/forgot', upload.none(), async (req, res) => {
+router.get('/forgot', upload.none(), async (req, res) => {
   const { password } = req.body;
   const code = req.query.code;
 

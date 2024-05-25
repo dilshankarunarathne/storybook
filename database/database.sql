@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 24, 2024 at 01:21 PM
+-- Generation Time: May 24, 2024 at 02:49 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -38,6 +38,24 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Triggers `comment`
+--
+DROP TRIGGER IF EXISTS `decrement_comments_count`;
+DELIMITER $$
+CREATE TRIGGER `decrement_comments_count` AFTER DELETE ON `comment` FOR EACH ROW BEGIN
+   UPDATE post SET comments_count = comments_count - 1 WHERE post_id = OLD.post;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `increment_comments_count`;
+DELIMITER $$
+CREATE TRIGGER `increment_comments_count` AFTER INSERT ON `comment` FOR EACH ROW BEGIN
+   UPDATE post SET comments_count = comments_count + 1 WHERE post_id = NEW.post;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +75,24 @@ CREATE TABLE IF NOT EXISTS `post` (
   PRIMARY KEY (`post_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Triggers `post`
+--
+DROP TRIGGER IF EXISTS `decrement_posts_count`;
+DELIMITER $$
+CREATE TRIGGER `decrement_posts_count` AFTER DELETE ON `post` FOR EACH ROW BEGIN
+   UPDATE user SET posts_count = posts_count - 1 WHERE username = OLD.user;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `increment_posts_count`;
+DELIMITER $$
+CREATE TRIGGER `increment_posts_count` AFTER INSERT ON `post` FOR EACH ROW BEGIN
+   UPDATE user SET posts_count = posts_count + 1 WHERE username = NEW.user;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +107,24 @@ CREATE TABLE IF NOT EXISTS `react` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Triggers `react`
+--
+DROP TRIGGER IF EXISTS `decrement_likes_count`;
+DELIMITER $$
+CREATE TRIGGER `decrement_likes_count` AFTER DELETE ON `react` FOR EACH ROW BEGIN
+   UPDATE post SET likes_count = likes_count - 1 WHERE post_id = OLD.post;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `increment_likes_count`;
+DELIMITER $$
+CREATE TRIGGER `increment_likes_count` AFTER INSERT ON `react` FOR EACH ROW BEGIN
+   UPDATE post SET likes_count = likes_count + 1 WHERE post_id = NEW.post;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -81,7 +135,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(15) NOT NULL,
   `hashed_password` varchar(64) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(40) NOT NULL,
   `verified` tinyint(1) NOT NULL DEFAULT '0',
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
@@ -93,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `verificationCode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Your Account</title>
+</head>
+<body>
+    <h1>Verify Your Account</h1>
+    <p>Click the link below to verify your account:</p>
+    <a href="http://localhost:8000/auth/verify?code={{verification-code}}">Click here to verify</a>
+    <p>If you didn't create an account, you can safely ignore this email.</p>
+    <p>Thanks, <br> The {{ config('app.name') }} Team</p>
+</body>
+</html>
