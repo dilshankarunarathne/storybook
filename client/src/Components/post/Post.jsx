@@ -1,7 +1,8 @@
-import "./post.css"
 import {MoreVert} from "@mui/icons-material"
 import AuthContext from "../../context/AuthContext";
 import {useContext} from "react";
+
+import "./post.css"
 
 export default function Post() {
     const { token, login, logout } = useContext(AuthContext);

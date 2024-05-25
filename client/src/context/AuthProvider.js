@@ -4,7 +4,6 @@ import AuthContext from './AuthContext';
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
 
-    // Check if user is logged in when the app loads
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
@@ -13,7 +12,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (username, password) => {
-        // Call your API here
+        // TODO: Call API here
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -25,7 +24,7 @@ const AuthProvider = ({ children }) => {
             setToken(token);
             localStorage.setItem('token', token);
         } else {
-            // Handle login error
+            // TODO: Handle login error
         }
     };
 
