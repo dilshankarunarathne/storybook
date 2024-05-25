@@ -58,7 +58,7 @@ router.post('/login', upload.none(), async (req, res) => {
   res.send({ token });
 });
 
-router.post('/verify', upload.none(), async (req, res) => {
+router.get('/verify', upload.none(), async (req, res) => {
   const code = req.query.code;
 
   if (!code) {
@@ -79,7 +79,7 @@ router.post('/verify', upload.none(), async (req, res) => {
   res.status(200).send('User confirmed successfully');
 });
 
-router.get('/forgot', upload.none(), async (req, res) => {
+router.post('/forgot', upload.none(), async (req, res) => {
   const { username } = req.body;
 
   if (!username) {
@@ -109,7 +109,7 @@ router.get('/forgot', upload.none(), async (req, res) => {
   res.status(200).send('Password reset code sent successfully');
 });
 
-router.post('/forgot', upload.none(), async (req, res) => {
+router.get('/forgot', upload.none(), async (req, res) => {
   const { password } = req.body;
   const code = req.query.code;
 
