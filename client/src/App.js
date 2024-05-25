@@ -1,16 +1,9 @@
-//import logo from './logo.svg';
-import './App.css';
-import { Home } from './Home/Home';
-//import LoginSignup from './Components/LoginSignup/LoginSignup';
-//import { Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
-//import HeaderArea from './Components/HeaderArea/HeaderArea';
+import Home from "./pages/home/Home";
 
 function App() {
   return (
-    <div className='App'>
       <Home/>
 
-    </div>
   );
 }
 

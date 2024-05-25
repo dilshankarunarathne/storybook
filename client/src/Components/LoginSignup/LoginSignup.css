@@ -17,17 +17,15 @@
     margin-top: 30px;
 }
 
-.text{
+.headerName{
     color: #3c009d;
     font-size: 48px;
     font-weight: 700;
 }
 
-.underline{
-    width: 61px;
-    height: 6px;
-    background: #3c009d;
-    border-radius: 9px;
+.desc{
+    font-size: 18px;
+    font-weight: 300; 
 }
 
 .inputs{
@@ -42,7 +40,7 @@
     align-items: center;
     margin: auto;
     width: 480px;
-    height: 80px;
+    height: 60px;
     background: #eaeaea;
     border-radius: 6px;
 }
@@ -52,7 +50,7 @@
 }
 
 .input input{
-    height: 50px;
+    height: 30px;
     width: 400px;
     background: transparent;
     border: none;
