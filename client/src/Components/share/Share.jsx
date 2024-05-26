@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {PermMedia} from "@mui/icons-material";
 
 import {createPost} from '../../api/post';
-import {getProfile} from '../../api/profile';
+import {getCurrentUser} from '../../api/profile';
 
 import "./share.css";
 
@@ -15,7 +15,7 @@ export default function Share() {
         const fetchProfile = async () => {
             try {
                 const username = localStorage.getItem('username'); // replace this line with the actual way to get the username
-                const profile = await getProfile(username);
+                const profile = await getCurrentUser();
                 setFirstName(profile.first_name);
             } catch (error) {
                 console.error(error);
