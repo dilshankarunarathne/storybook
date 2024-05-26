@@ -1,0 +1,14 @@
+.feed{
+    flex: 5.5;
+}
+
+.feedWrapper{
+    padding: 20px;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+}

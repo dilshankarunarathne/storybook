@@ -86,7 +86,7 @@ router.delete('/', upload.none(), authMiddleware, async (req, res) => {
         return res.status(400).send('Comment id is required and you must be logged in');
     }
 
-    const comment = await Comment.findOne({ where: { id, user } });
+    const comment = await Comment.findOne({ where: { comment_id: id, user } });
 
     if (!comment) {
         return res.status(404).send('Comment not found');
