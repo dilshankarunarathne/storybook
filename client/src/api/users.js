@@ -24,7 +24,7 @@ export const registerUser = async (user) => {
         formData.append(key, user[key]);
     }
 
-    const response = await fetch(`${API_URL}/register`, {
+    const response = await fetch(`${API_URL}/signup`, {
         method: 'POST',
         body: formData
     });

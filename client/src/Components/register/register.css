@@ -55,15 +55,14 @@
 
 .nameContainer {
     display: flex;
-    justify-content: space-between;
 }
 
 .fnameLeft {
-    width: 48%;
+    width: 50%;
 }
 
 .lnameRight{
-    width: 44%;
+    width: 50%;
 }
 
 .registerButton{
