@@ -19,13 +19,13 @@ export default function Register() {
                     <input type="password" placeholder="Confirm Password" className="registerInput" />
                     <div className="nameContainer">
                         <div className="fnameLeft">
-                            <input placeholder="Firstname" className="registerInput" />
+                            <input placeholder="First name" className="registerInput" />
                         </div>
                         <div className="lnameRight">
-                            <input placeholder="Lastname" className="registerInput" />
+                            <input placeholder="Last name" className="registerInput" />
                         </div>
-                        </div>
-                    <input placeholder="Date of Birth" className="registerInput" />
+                    </div>
+                    <input className="registerInput" type='date'  />
                     <button className="registerButton">Sign Up</button>
                     <button className="logRegisterButton">Log into Account</button>
                 </div>
