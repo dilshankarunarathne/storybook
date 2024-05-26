@@ -10,10 +10,10 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-            <Route path="/" component={Home} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/profile" component={Profile} />
+            <Route path="/" component={Home} />
         </Switch>
       </Router>
     </AuthProvider>
