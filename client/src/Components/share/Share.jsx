@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {PermMedia} from "@mui/icons-material";
 
 import {createPost} from '../../api/post';
@@ -14,7 +14,7 @@ export default function Share() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const username = localStorage.getItem('username'); // replace this line with the actual way to get the username
+                const username = localStorage.getItem('username');
                 const profile = await getCurrentUser();
                 setFirstName(profile.first_name);
             } catch (error) {
