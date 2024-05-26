@@ -7,8 +7,8 @@ export const getProfile = async (username) => {
     const formData = new FormData();
     formData.append('username', username);
 
-    const response = await fetch(`${API_URL}`, {
-        method: 'GET',
+    const response = await fetch(API_URL, {
+        method: 'POST',
         body: formData,
         headers: {
             'Authorization': `Bearer ${token}`

@@ -8,7 +8,7 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
-router.get('/', upload.none(), authMiddleware, async (req, res) => {
+router.post('/', upload.none(), authMiddleware, async (req, res) => {
   const { username } = req.body;
 
   if (!username) {
