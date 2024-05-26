@@ -1,10 +1,13 @@
 const API_URL = 'http://localhost:8000/auth';
 
 export const loginUser = async (username, password) => {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
     const response = await fetch(`${API_URL}/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: formData
     });
 
     if (response.ok) {
@@ -15,10 +18,15 @@ export const loginUser = async (username, password) => {
 };
 
 export const registerUser = async (user) => {
+    const formData = new FormData();
+
+    for (const key in user) {
+        formData.append(key, user[key]);
+    }
+
     const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
+        body: formData
     });
 
     if (response.ok) {
