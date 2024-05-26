@@ -1,7 +1,7 @@
 import React, {useContext, useRef} from 'react';
+import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../context/AuthContext';
-import {loginUser} from '../../api/users';
 
 import "./login.css"
 
@@ -11,11 +11,13 @@ export default function Login() {
 
     const {login} = useContext(AuthContext);
 
+    const history = useHistory();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             await login(emailRef.current.value, passwordRef.current.value);
-            // TODO: Handle successful login
+            history.push('/');
         } catch (error) {
             console.log(error.message);
             // TODO: show error message to user
