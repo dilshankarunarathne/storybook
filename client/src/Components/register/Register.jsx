@@ -25,7 +25,8 @@ export default function Register() {
                             <input placeholder="Last name" className="registerInput" />
                         </div>
                     </div>
-                    <input className="registerInput" type='date'  />
+                    <input type="text" placeholder="Date of Birth"
+                           onfocus="(this.type='date')" className="registerInput"   />
                     <button className="registerButton">Sign Up</button>
                     <button className="logRegisterButton">Log into Account</button>
                 </div>
