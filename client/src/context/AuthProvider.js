@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AuthContext from './AuthContext';
+import { loginUser } from '../api/users';
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
@@ -12,18 +13,12 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (username, password) => {
-        // TODO: Call API here
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
-
-        if (response.ok) {
-            const { token } = await response.json();
+        try {
+            const data = await loginUser(username, password);
+            const { token } = data;
             setToken(token);
             localStorage.setItem('token', token);
-        } else {
+        } catch (error) {
             // TODO: Handle login error
         }
     };
