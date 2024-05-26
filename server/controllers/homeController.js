@@ -36,8 +36,9 @@ router.get('/post', upload.none(), async (req, res) => {
     res.json(post);
 });
 
-router.post('/post', upload.none(), authMiddleware, async (req, res) => {
-    const { text, image } = req.body;
+router.post('/post', upload.single('image'), authMiddleware, async (req, res) => {
+    const { text } = req.body;
+    const image = req.file;
 
     if (!text) {
         return res.status(400).send('Text is required');
