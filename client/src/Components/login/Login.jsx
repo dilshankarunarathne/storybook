@@ -36,7 +36,7 @@ export default function Login() {
                 </div>
                 <div className="loginRight">
                     <div className="loginBox">
-                        <input ref={emailRef} placeholder="Email" className="loginInput"/>
+                        <input ref={emailRef} placeholder="Username" className="loginInput"/>
                         <input ref={passwordRef} placeholder="Password" className="loginInput"/>
                         <button className="loginButton" onClick={handleLogin}>Log In</button>
                         <span className="loginForgot">Forgot Password?</span>
