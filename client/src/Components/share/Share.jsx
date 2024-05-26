@@ -10,20 +10,20 @@ export default function Share() {
     const [image, setImage] = useState(null);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('text', text);
-        if (image) {
-            formData.append('image', image);
-        }
-        try {
-            await createPost(formData);
-            setText('');
-            setImage(null);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('text', text);
+    if (image) {
+        formData.append('image', image);
+    }
+    try {
+        await createPost(formData);
+        setText('');
+        setImage(null);
+    } catch (error) {
+        console.error(error);
+    }
+};
 
     return (
         <form className="share" onSubmit={handleSubmit}>
