@@ -1,4 +1,4 @@
-.register{
+.register {
     width: 100vw;
     height: 100vh;
     background-color: #f0f2f5;
@@ -7,31 +7,31 @@
     justify-content: center;
 }
 
-.registerWrapper{
+.registerWrapper {
     width: 60%;
     height: 60%;
     display: flex;
 }
 
-.registerLeft,.registerRight{
+.registerLeft, .registerRight {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.registerLogo{
+.registerLogo {
     font-size: 50px;
     font-weight: 800;
     color: #1775ee;
     margin-bottom: 10px;
 }
 
-.registerDesc{
+.registerDesc {
     font-size: 25px;
 }
 
-.registerBox{
+.registerBox {
     height: 550px;
     padding: 40px;
     background-color: white;
@@ -41,7 +41,7 @@
     justify-content: space-between;
 }
 
-.registerInput{
+.registerInput {
     height: 50px;
     border-radius: 10px;
     border: 1px solid gray;
@@ -49,7 +49,7 @@
     padding-left: 10px;
 }
 
-.registerInput:focus{
+.registerInput:focus {
     outline: none;
 }
 
@@ -61,23 +61,23 @@
     width: 50%;
 }
 
-.lnameRight{
+.lnameRight {
     width: 50%;
 }
 
-.registerButton{
-     height: 50px;
-     border-radius: 10px;
-     border: none;
-     background-color: #1775ee;
-     color: white;
-     font-size: 20px;
-     font-weight: 500;
-     cursor: pointer;
+.registerButton {
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1775ee;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 
-.logRegisterButton{
+.logRegisterButton {
     width: 50%;
     align-self: center;
     height: 50px;

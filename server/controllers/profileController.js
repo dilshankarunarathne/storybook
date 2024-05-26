@@ -8,7 +8,19 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
-router.get('/', upload.none(), authMiddleware, async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+
+    const user = await User.findOne({ where: { username } });
+
+    if (!user) {
+        return res.status(404).send('User not found');
+    }
+
+    res.json(user);
+});
+
+router.post('/', upload.none(), authMiddleware, async (req, res) => {
   const { username } = req.body;
 
   if (!username) {
