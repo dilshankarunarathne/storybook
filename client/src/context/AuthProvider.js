@@ -5,15 +5,18 @@ import { loginUser } from '../api/users';
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
             setToken(storedToken);
         }
+        setLoading(false);
     }, []);
 
     const login = async (username, password) => {
+        setLoading(true);
         try {
             const data = await loginUser(username, password);
             const { token } = data;
@@ -22,6 +25,7 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
             // TODO: Handle login error
         }
+        setLoading(false);
     };
 
     const logout = () => {
@@ -30,7 +34,7 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, login, logout }}>
+        <AuthContext.Provider value={{ token, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );
