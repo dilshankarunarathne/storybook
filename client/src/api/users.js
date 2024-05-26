@@ -1,7 +1,6 @@
 const API_URL = 'http://localhost:8000/auth';
 
 export const loginUser = async (username, password) => {
-    console.log('called1');
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
