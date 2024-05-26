@@ -52,6 +52,12 @@ router.get('/post', upload.none(), async (req, res) => {
         return res.status(404).send('Post not found');
     }
 
+    if (post.image) {
+        // Convert the image Buffer to a base64 string
+        const imageBase64 = Buffer.from(post.image.data).toString('base64');
+        post.image = `data:image/jpeg;base64,${imageBase64}`;
+    }
+
     res.json(post);
 });
 

@@ -3,6 +3,13 @@ import {MoreVert} from "@mui/icons-material"
 import "./post.css"
 
 export default function Post({ post }) {
+    let imageSrc = '';
+    if (post.image) {
+        const buffer = new Uint8Array(post.image.data);
+        const blob = new Blob([buffer], { type: 'image/jpeg' });
+        imageSrc = URL.createObjectURL(blob);
+    }
+
     return (
         <div className="post">
             <div className="postWrapper">
@@ -18,7 +25,7 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post.text}</span>
-                    {post.image && <img className="postImg" src={post.image} alt=""/>}
+                    {post.image && <img className="postImg" src={imageSrc} alt=""/>}
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
