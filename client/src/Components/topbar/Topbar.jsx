@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 
 import AuthContext from '../../context/AuthContext';
 
 import "./topbar.css"
 
 export default function Topbar() {
-    const { logout } = useContext(AuthContext);
+    const {logout} = useContext(AuthContext);
     const history = useHistory();
 
     return (
