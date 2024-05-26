@@ -8,8 +8,7 @@ export const loginUser = async (username, password) => {
     });
 
     if (response.ok) {
-        const data = await response.json();
-        return data;
+        return await response.json();
     } else {
         throw new Error('Error during login');
     }
@@ -23,8 +22,7 @@ export const registerUser = async (user) => {
     });
 
     if (response.ok) {
-        const data = await response.json();
-        return data;
+        return await response.json();
     } else {
         throw new Error('Error during registration');
     }
