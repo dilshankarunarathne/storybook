@@ -32,7 +32,9 @@ export default function Register() {
                       className="registerInput"
                     />
                     <button className="registerButton">Sign Up</button>
-                    <button className="logRegisterButton">Log into Account</button>
+                    <br />
+                    Already have an account ?
+                    <button className="logRegisterButton">Log in</button>
                 </div>
             </div>
         </div>
