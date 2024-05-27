@@ -21,6 +21,7 @@ export default function Register() {
             const user = {username, password, email, first_name: firstName, last_name: lastName, dob};
             const response = await registerUser(user);
             console.log(response);
+            history.push('/landing');
         } catch (error) {
             console.error(error);
         }
