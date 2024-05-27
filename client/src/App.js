@@ -16,6 +16,7 @@ function App() {
         <AuthProvider>
             <Router>
                 <Switch>
+                    <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/landingPage" component={LandingPage}/>
                     <Route path="/reset" component={ResetPassword}/>
