@@ -150,6 +150,7 @@ router.get('/verify', upload.none(), async (req, res) => {
     res.redirect('http://localhost:3000/success');
 });
 
+
 router.post('/forgot', upload.none(), async (req, res) => {
     const { username } = req.body;
 
