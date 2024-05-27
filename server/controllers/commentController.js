@@ -54,6 +54,7 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(201).send('Comment added successfully');
 });
 
+
 router.put('/', upload.none(), authMiddleware, async (req, res) => {
     const { id, text } = req.body;
     const user = req.user.username;
