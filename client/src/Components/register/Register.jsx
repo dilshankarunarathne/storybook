@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
+
 import {registerUser} from '../../api/users';
 
 import "./register.css"
@@ -11,6 +13,8 @@ export default function Register() {
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
 
+    const history = useHistory();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -21,6 +25,10 @@ export default function Register() {
             console.error(error);
         }
     };
+
+    const handleLogin = () => {
+        history.push('/login');
+    }
 
     return (
         <div className="register">
@@ -89,7 +97,7 @@ export default function Register() {
                         <button className="registerButton">Sign Up</button>
                         <br/>
                         Already have an account ?
-                        <button className="logRegisterButton">Log in</button>
+                        <button className="logRegisterButton" onClick={handleLogin}>Log in</button>
                     </form>
                 </div>
             </div>
