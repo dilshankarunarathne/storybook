@@ -84,7 +84,7 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
         last_modified: new Date()
     });
 
-    res.status(201).send('Comment added successfully');
+    res.status(201).json(comment);
 });
 
 /**
