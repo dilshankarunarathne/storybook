@@ -109,9 +109,8 @@ router.post('/forgot', upload.none(), async (req, res) => {
   res.status(200).send('Password reset code sent successfully');
 });
 
-router.get('/forgot', upload.none(), async (req, res) => {
-  const { password } = req.body;
-  const code = req.query.code;
+router.post('/reset', upload.none(), async (req, res) => {
+  const { password, code } = req.body;
 
   if (!password || !code) {
     return res.status(400).send('Password and verification code are required');
