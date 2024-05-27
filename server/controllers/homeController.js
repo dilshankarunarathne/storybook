@@ -181,7 +181,24 @@ router.put('/post', upload.none(), authMiddleware, async (req, res) => {
     res.status(200).send('Post updated successfully');
 });
 
-
+/**
+ * @swagger
+ * /post:
+ *   delete:
+ *     summary: Delete a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Post deleted successfully
+ */
 router.delete('/post', upload.none(), authMiddleware, async (req, res) => {
     const { id } = req.body;
 
