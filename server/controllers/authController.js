@@ -150,7 +150,24 @@ router.get('/verify', upload.none(), async (req, res) => {
     res.redirect('http://localhost:3000/success');
 });
 
-
+/**
+ * @swagger
+ * /forgot:
+ *   post:
+ *     summary: Send a password reset email
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset code sent successfully
+ */
 router.post('/forgot', upload.none(), async (req, res) => {
     const { username } = req.body;
 
