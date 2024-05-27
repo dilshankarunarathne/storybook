@@ -130,6 +130,7 @@ router.post('/post', upload.single('image'), authMiddleware, async (req, res) =>
     res.status(201).send('Post created successfully');
 });
 
+
 router.put('/post', upload.none(), authMiddleware, async (req, res) => {
     const { id, text, image } = req.body;
 
