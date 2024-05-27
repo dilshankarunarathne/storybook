@@ -57,7 +57,34 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
   res.json(user);
 });
 
-
+/**
+ * @swagger
+ * /profile:
+ *   put:
+ *     summary: Update the profile of the logged in user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               first_name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *               dob:
+ *                 type: string
+ *                 format: date
+ *               bio:
+ *                 type: string
+ *               profile_picture:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Profile updated successfully
+ */
 router.put('/', upload.single('profile_picture'), authMiddleware, async (req, res) => {
     const { first_name, last_name, dob, bio } = req.body;
     const user = req.user.username;
