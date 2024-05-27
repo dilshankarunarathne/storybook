@@ -52,7 +52,21 @@ router.get('/', authMiddleware, async (req, res) => {
     res.json(posts);
 });
 
-
+/**
+ * @swagger
+ * /post:
+ *   get:
+ *     summary: Retrieves a specific post by id
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: The post data
+ */
 router.get('/post', upload.none(), async (req, res) => {
     const { id } = req.body;
 
