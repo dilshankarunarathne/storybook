@@ -85,7 +85,27 @@ router.get('/post', upload.none(), async (req, res) => {
     res.json(post);
 });
 
-
+/**
+ * @swagger
+ * /post:
+ *   post:
+ *     summary: Create a new post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Post created successfully
+ */
 router.post('/post', upload.single('image'), authMiddleware, async (req, res) => {
     const { text } = req.body;
     let image = null;
