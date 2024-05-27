@@ -11,6 +11,7 @@ import Login from "./Components/login/Login";
 import Profile from "./Components/profile/Profile";
 import EditProfile from "./Components/edit_profile/EditProfile";
 import LandingPage from './Components/landingPage/LandingPage';
+import VerificationSuccess from "./pages/success/Success";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/landing" component={LandingPage}/>
                     <Route path="/reset" component={ResetPassword}/>
                     <Route path="/forgot" component={ForgotPassword}/>
+                    <Route path="/success" component={VerificationSuccess}/>
                     <PrivateRoute path="/profile" component={Profile}/>
                     <PrivateRoute path="/edit" component={EditProfile}/>
                     <PrivateRoute path="/" component={Home}/>

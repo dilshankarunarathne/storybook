@@ -76,7 +76,7 @@ router.get('/verify', upload.none(), async (req, res) => {
 
     await user.save();
 
-    res.status(200).send('User confirmed successfully');
+    res.redirect('http://localhost:3000/success');
 });
 
 router.post('/forgot', upload.none(), async (req, res) => {
