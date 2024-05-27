@@ -30,7 +30,7 @@ export const registerUser = async (user) => {
     });
 
     if (response.ok) {
-        return await response.json();
+        return await response.text();
     } else {
         throw new Error('Error during registration');
     }
