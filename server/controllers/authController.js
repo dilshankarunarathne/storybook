@@ -12,6 +12,35 @@ const router = express.Router();
 
 const upload = multer();
 
+/**
+ * @swagger
+ * /signup:
+ *   post:
+ *     summary: Register a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               first_name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *               dob:
+ *                 type: string
+ *                 format: date
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ */
 router.post('/signup', upload.none(), async (req, res) => {
     const { username, password, email, first_name, last_name, dob } = req.body;
 
