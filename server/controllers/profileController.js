@@ -27,7 +27,15 @@ const router = express.Router();
 
 const upload = multer({ storage: storage });
 
-
+/**
+ * @swagger
+ * /profile:
+ *   get:
+ *     summary: Retrieves the profile of the logged in user
+ *     responses:
+ *       200:
+ *         description: The profile of the user
+ */
 router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
 
