@@ -50,6 +50,6 @@ app.use('/profile', profileController);
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-fs.writeFileSync('./swagger.json', JSON.stringify(swaggerDocs, null, 2));
+// fs.writeFileSync('./swagger.json', JSON.stringify(swaggerDocs, null, 2));
 
 app.listen(8000, () => console.log('Server started on port 8000'));
