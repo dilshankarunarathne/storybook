@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import {MoreVert} from "@mui/icons-material"
 
 import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
+import {editPost, deletePost} from '../../api/post';
 
 import "./post.css"
 
@@ -19,6 +20,8 @@ export default function Post({post}) {
     const [showOptions, setShowOptions] = useState(false);
     const [currentCommentId, setCurrentCommentId] = useState(null);
     const [editCommentText, setEditCommentText] = useState('');
+    const [showPostOptions, setShowPostOptions] = useState(false);
+    const [editPostText, setEditPostText] = useState('');
 
     useEffect(() => {
         // fetchComments(); // TODO: bug - auto load new comments
@@ -70,6 +73,31 @@ export default function Post({post}) {
         await fetchComments();
     };
 
+    const handlePostOptions = () => {
+        setShowPostOptions(true);
+    };
+
+    const handleEditPost = async () => {
+        try {
+            await editPost(post.post_id, editPostText);
+            console.log(`Post ${post.post_id} edited.`);
+            setShowPostOptions(false);
+            // TODO: Refresh the post
+        } catch (error) {
+            console.error(`Error during post editing: ${error.message}`);
+        }
+    };
+
+    const handleDeletePost = async () => {
+        try {
+            await deletePost(post.post_id);
+            setShowPostOptions(false);
+            // TODO: Remove the post from the UI
+        } catch (error) {
+            console.error(`Error during post deletion: ${error.message}`);
+        }
+    };
+
     return (
         <div className="post">
             <div className="postWrapper">
@@ -80,11 +108,18 @@ export default function Post({post}) {
                         <span className="postDate">{new Date(post.created).toDateString()}</span>
                     </div>
                     <div className="postTopRight">
-                        <MoreVert/>
+                        <MoreVert onClick={handlePostOptions}/>
+                        {showPostOptions && (
+                            <div className="postOptionsPopup">
+                                <input type="text" value={editPostText} onChange={(e) => setEditPostText(e.target.value)} />
+                                <button onClick={handleEditPost}>Edit Post</button>
+                                <button onClick={handleDeletePost}>Delete Post</button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="postCenter">
-                    <span className="postText">{post.text}</span>
+                <span className="postText">{post.text}</span>
                     {post.image && <img className="postImg" src={imageSrc} alt=""/>}
                 </div>
                 <div className="postBottom">
