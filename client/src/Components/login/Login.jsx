@@ -28,6 +28,10 @@ export default function Login() {
         history.push('/register/');
     }
 
+    const handleForgotPassword = () => {
+        history.push('/forgot');
+    }
+
     return (
         <div className="login">
             <div className="loginWrapper">
@@ -54,7 +58,7 @@ export default function Login() {
                             className="loginInput"
                         />
                         <button className="loginButton" onClick={handleLogin}>Log In</button>
-                        <span className="loginForgot">Forgot Password?</span>
+                        <span className="loginForgot" onClick={handleForgotPassword}>Forgot Password?</span>
                         <span className="LoginRegister">Don't have an account, Click here to</span>
                         <button className="loginRegisterButton" onClick={handleRegister}>Sign Up</button>
                     </div>
