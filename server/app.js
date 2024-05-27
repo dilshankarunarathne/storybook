@@ -20,8 +20,8 @@ const profileController = require('./controllers/profileController');
 app.use(cors()); 
 app.use(express.json());
 
-app.use('/auth', authController);
 app.use('/', homeController);
+app.use('/auth', authController);
 app.use('/react', reactController);
 app.use('/comment', commentController);
 app.use('/profile', profileController);
