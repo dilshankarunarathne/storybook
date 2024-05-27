@@ -9,6 +9,10 @@ export default function Topbar() {
     const {logout} = useContext(AuthContext);
     const history = useHistory();
 
+    const navigateHome = () => {
+        history.push('/');
+    };
+
     return (
         <div className='topbarContainer'>
             <div className="topbarLeft">
@@ -17,7 +21,7 @@ export default function Topbar() {
 
             <div className="topbarRight">
                 <div className="topbarLinks">
-                    <span className="topbarLink">Home</span>
+                    <span className="topbarLink" onClick={navigateHome}>Home</span>
                     <span className="topbarLink" onClick={logout}>Logout</span>
                 </div>
 

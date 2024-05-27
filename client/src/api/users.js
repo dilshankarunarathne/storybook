@@ -35,3 +35,20 @@ export const registerUser = async (user) => {
         throw new Error('Error during registration');
     }
 };
+
+export const resetPassword = async (password, code) => {
+    const formData = new FormData();
+    formData.append('password', password);
+    formData.append('code', code);
+
+    const response = await fetch(`${API_URL}/reset`, {
+        method: 'POST',
+        body: formData
+    });
+
+    if (response.ok) {
+        return await response.json();
+    } else {
+        throw new Error('Error during password reset');
+    }
+};
