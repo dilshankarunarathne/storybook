@@ -9,7 +9,21 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
-
+/**
+ * @swagger
+ * /comment:
+ *   get:
+ *     summary: Retrieves all comments for a specific post
+ *     parameters:
+ *       - in: query
+ *         name: post
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: The list of comments
+ */
 router.get('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.query;
 
