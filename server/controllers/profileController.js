@@ -27,6 +27,7 @@ const router = express.Router();
 
 const upload = multer({ storage: storage });
 
+
 router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
 
