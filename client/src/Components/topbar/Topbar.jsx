@@ -8,17 +8,20 @@ import "./topbar.css"
 
 export default function Topbar() {
     const {logout} = useContext(AuthContext);
+    const {loading} = useContext(AuthContext);
+
     const history = useHistory();
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const userData = await getCurrentUser();
-            setUser(userData);
-        };
-
-        fetchUser();
-    }, []);
+        if (!loading) {
+            const fetchUser = async () => {
+                const userData = await getCurrentUser();
+                setUser(userData);
+            };
+            fetchUser();
+        }
+    }, [loading]);
 
     const navigateHome = () => {
         history.push('/');
