@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { resetPassword } from '../../api/users';
 
 import './reset.css';
 
 function ResetPassword() {
-    const validatePassword = () => {
+    const [code, setCode] = useState(null);
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        setCode(params.get('code'));
+    }, [location]);
+
+    const validatePassword = async () => {
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
         const errorMessage = document.getElementById('errorMessage');
@@ -24,8 +35,15 @@ function ResetPassword() {
         }
 
         errorMessage.style.display = 'none';
-        alert('Password has been reset successfully!');
-        document.getElementById('resetForm').reset();
+
+        try {
+            await resetPassword(newPassword, code);
+            alert('Password has been reset successfully!');
+            document.getElementById('resetForm').reset();
+        } catch (error) {
+            alert('Error during password reset');
+        }
+
         return true;
     }
 
