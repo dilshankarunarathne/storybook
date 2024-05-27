@@ -114,7 +114,21 @@ router.post('/login', upload.none(), async (req, res) => {
     res.send({ token });
 });
 
-
+/**
+ * @swagger
+ * /verify:
+ *   get:
+ *     summary: Verify a user's email
+ *     parameters:
+ *       - in: query
+ *         name: code
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Verification successful
+ */
 router.get('/verify', upload.none(), async (req, res) => {
     const code = req.query.code;
 
