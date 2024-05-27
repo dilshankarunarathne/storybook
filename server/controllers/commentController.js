@@ -81,6 +81,7 @@ router.put('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(200).send('Comment updated successfully');
 });
 
+
 router.delete('/', upload.none(), authMiddleware, async (req, res) => {
     const { id } = req.body;
     const user = req.user.username;
