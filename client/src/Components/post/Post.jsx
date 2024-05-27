@@ -1,5 +1,5 @@
+import {useState,useEffect} from 'react';
 import {MoreVert} from "@mui/icons-material"
-import {useState} from 'react';
 
 import {getComments, addComment} from '../../api/comments';
 
@@ -7,6 +7,7 @@ import "./post.css"
 
 export default function Post({post}) {
     let imageSrc = '';
+
     if (post.image) {
         const buffer = new Uint8Array(post.image.data);
         const blob = new Blob([buffer], {type: 'image/jpeg'});
@@ -15,15 +16,38 @@ export default function Post({post}) {
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [showOptions, setShowOptions] = useState(false);
+    const [currentCommentId, setCurrentCommentId] = useState(null);
+
+    useEffect(() => {
+        // fetchComments(); // TODO: bug - auto load new comments
+    }, [comments]);
 
     const fetchComments = async () => {
-    if (post && post.post_id) {
-        const fetchedComments = await getComments(post.post_id);
-        setComments(fetchedComments);
-    } else {
-        console.error('Post or post id is undefined');
-    }
-};
+        if (post && post.post_id) {
+            const fetchedComments = await getComments(post.post_id);
+            setComments(fetchedComments);
+        } else {
+            console.error('Post or post id is undefined');
+        }
+    };
+
+    const handleCommentOptions = (commentId) => {
+        setCurrentCommentId(commentId);
+        setShowOptions(true);
+    };
+
+    const handleEditComment = () => {
+        // TODO: Implement edit comment functionality here
+        console.log(`Edit comment ${currentCommentId}`);
+        setShowOptions(false);
+    };
+
+    const handleDeleteComment = () => {
+        // TOTO: Implement delete comment functionality here
+        console.log(`Delete comment ${currentCommentId}`);
+        setShowOptions(false);
+    };
 
     const handleNewCommentChange = (e) => {
         setNewComment(e.target.value);
@@ -32,8 +56,8 @@ export default function Post({post}) {
     const handleNewCommentSubmit = async (e) => {
         e.preventDefault();
         await addComment(post.post_id, newComment);
-        setNewComment('');
-        fetchComments();
+        setNewComment(prevComment => '');
+        await fetchComments();
     };
 
     return (
@@ -63,12 +87,29 @@ export default function Post({post}) {
                     </div>
                 </div>
                 {comments.map(comment => (
-                    <div key={comment.id}>
+                    <div key={comment.id} className="comment">
+                        <div className="postTop">
+                            <div className="postTopLeft">
+                                <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
+                                <span className="postUsername">{comment.user}</span>
+                                <span className="postDate">{new Date(comment.created).toDateString()}</span>
+                            </div>
+                            <div className="postTopRight">
+                                <MoreVert onClick={() => handleCommentOptions(comment.id)}/>
+                            </div>
+                        </div>
                         <span>{comment.text}</span>
+                        {currentCommentId === comment.id && (
+                            <div className="commentOptionsPopup">
+                                <button onClick={handleEditComment}>Edit Comment</button>
+                                <button onClick={handleDeleteComment}>Delete Comment</button>
+                            </div>
+                        )}
                     </div>
                 ))}
-                <form onSubmit={handleNewCommentSubmit}>
-                    <input type="text" value={newComment} onChange={handleNewCommentChange} placeholder="Add a comment" />
+                <form onSubmit={handleNewCommentSubmit} className="commentForm">
+                    <input type="text" value={newComment} onChange={handleNewCommentChange}
+                           placeholder="Add a comment"/>
                     <button type="submit">Submit</button>
                 </form>
             </div>
