@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const authMiddleware = require('../middleware/authMiddleware');
 const Post = require('../models/Post');
 
@@ -6,7 +9,23 @@ const express = require('express');
 const {Op} = require("sequelize");
 
 const router = express.Router();
-const upload = multer();
+
+const uploadDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir)
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
 
 router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
@@ -33,11 +52,23 @@ router.get('/post', upload.none(), async (req, res) => {
         return res.status(404).send('Post not found');
     }
 
+    if (post.image) {
+        // Convert the image Buffer to a base64 string
+        const imageBase64 = Buffer.from(post.image.data).toString('base64');
+        post.image = `data:image/jpeg;base64,${imageBase64}`;
+    }
+
     res.json(post);
 });
 
-router.post('/post', upload.none(), authMiddleware, async (req, res) => {
-    const { text, image } = req.body;
+router.post('/post', upload.single('image'), authMiddleware, async (req, res) => {
+    const { text } = req.body;
+    let image = null;
+
+    if (req.file) {
+        image = fs.readFileSync(req.file.path);
+        fs.unlinkSync(req.file.path); // delete the file after reading it
+    }
 
     if (!text) {
         return res.status(400).send('Text is required');
@@ -45,7 +76,7 @@ router.post('/post', upload.none(), authMiddleware, async (req, res) => {
 
     const post = await Post.create({
         text,
-        image: image || null,
+        image: image,
         user: req.user.username,
         created: new Date(),
         last_modified: new Date()
