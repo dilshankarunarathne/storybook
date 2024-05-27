@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import {MoreVert} from "@mui/icons-material"
 
-import {getComments, addComment} from '../../api/comments';
+import {getComments, addComment, deleteComment} from '../../api/comments';
 
 import "./post.css"
 
@@ -43,10 +43,14 @@ export default function Post({post}) {
         setShowOptions(false);
     };
 
-    const handleDeleteComment = () => {
-        // TOTO: Implement delete comment functionality here
-        console.log(`Delete comment ${currentCommentId}`);
-        setShowOptions(false);
+    const handleDeleteComment = async () => {
+        try {
+            await deleteComment(currentCommentId);
+            setShowOptions(false);
+            await fetchComments();
+        } catch (error) {
+            console.error(`Error during comment deletion: ${error.message}`);
+        }
     };
 
     const handleNewCommentChange = (e) => {
@@ -87,7 +91,7 @@ export default function Post({post}) {
                     </div>
                 </div>
                 {comments.map(comment => (
-                    <div key={comment.id} className="comment">
+                    <div key={comment.comment_id} className="comment">
                         <div className="postTop">
                             <div className="postTopLeft">
                                 <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
@@ -95,11 +99,11 @@ export default function Post({post}) {
                                 <span className="postDate">{new Date(comment.created).toDateString()}</span>
                             </div>
                             <div className="postTopRight">
-                                <MoreVert onClick={() => handleCommentOptions(comment.id)}/>
+                                <MoreVert onClick={() => handleCommentOptions(comment.comment_id)}/>
                             </div>
                         </div>
                         <span>{comment.text}</span>
-                        {currentCommentId === comment.id && (
+                        {currentCommentId === comment.comment_id && (
                             <div className="commentOptionsPopup">
                                 <button onClick={handleEditComment}>Edit Comment</button>
                                 <button onClick={handleDeleteComment}>Delete Comment</button>
