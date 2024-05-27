@@ -9,7 +9,7 @@ const User = require('../models/User');
 const uploadDir = path.join(__dirname, 'uploads');
 
 if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
+    fs.mkdirSync(uploadDir, {recursive: true});
 }
 
 const storage = multer.diskStorage({
@@ -25,7 +25,7 @@ const {Op} = require("sequelize");
 
 const router = express.Router();
 
-const upload = multer({ storage: storage });
+const upload = multer({storage: storage});
 
 /**
  * @swagger
@@ -39,7 +39,7 @@ const upload = multer({ storage: storage });
 router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
 
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({where: {username}});
 
     if (!user) {
         return res.status(404).send('User not found');
@@ -67,19 +67,19 @@ router.get('/', authMiddleware, async (req, res) => {
  *         description: The profile of the user
  */
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
-  const { username } = req.body;
+    const {username} = req.body;
 
-  if (!username) {
-    return res.status(400).send('Username is required');
-  }
+    if (!username) {
+        return res.status(400).send('Username is required');
+    }
 
-  const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({where: {username}});
 
-  if (!user) {
-    return res.status(404).send('User not found');
-  }
+    if (!user) {
+        return res.status(404).send('User not found');
+    }
 
-  res.json(user);
+    res.json(user);
 });
 
 /**
@@ -111,10 +111,10 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
  *         description: Profile updated successfully
  */
 router.put('/', upload.single('profile_picture'), authMiddleware, async (req, res) => {
-    const { first_name, last_name, dob, bio } = req.body;
+    const {first_name, last_name, dob, bio} = req.body;
     const user = req.user.username;
 
-    const userRecord = await User.findOne({ where: { username: user } });
+    const userRecord = await User.findOne({where: {username: user}});
 
     if (!userRecord) {
         return res.status(404).send('User not found');

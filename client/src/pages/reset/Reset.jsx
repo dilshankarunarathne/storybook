@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
 
-import { resetPassword } from '../../api/users';
+import {resetPassword} from '../../api/users';
 
 import './reset.css';
 
@@ -54,9 +54,9 @@ function ResetPassword() {
 
                 <form id="resetForm">
                     <label htmlFor="newPassword">New Password</label>
-                    <input type="password" id="newPassword" name="newPassword" required />
+                    <input type="password" id="newPassword" name="newPassword" required/>
                     <label htmlFor="confirmPassword">Confirm New Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required />
+                    <input type="password" id="confirmPassword" name="confirmPassword" required/>
                     <button type="button" onClick={validatePassword}>Set Password</button>
                     <p className="error" id="errorMessage"></p>
                 </form>
