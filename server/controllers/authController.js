@@ -12,6 +12,35 @@ const router = express.Router();
 
 const upload = multer();
 
+/**
+ * @swagger
+ * /signup:
+ *   post:
+ *     summary: Register a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               first_name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *               dob:
+ *                 type: string
+ *                 format: date
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ */
 router.post('/signup', upload.none(), async (req, res) => {
     const { username, password, email, first_name, last_name, dob } = req.body;
 
@@ -46,6 +75,33 @@ router.post('/signup', upload.none(), async (req, res) => {
     res.status(201).send('User registered successfully');
 });
 
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Login a user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ */
 router.post('/login', upload.none(), async (req, res) => {
     const user = await User.findOne({ where: { username: req.body.username } });
 
@@ -58,6 +114,21 @@ router.post('/login', upload.none(), async (req, res) => {
     res.send({ token });
 });
 
+/**
+ * @swagger
+ * /verify:
+ *   get:
+ *     summary: Verify a user's email
+ *     parameters:
+ *       - in: query
+ *         name: code
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Verification successful
+ */
 router.get('/verify', upload.none(), async (req, res) => {
     const code = req.query.code;
 
@@ -79,6 +150,24 @@ router.get('/verify', upload.none(), async (req, res) => {
     res.redirect('http://localhost:3000/success');
 });
 
+/**
+ * @swagger
+ * /forgot:
+ *   post:
+ *     summary: Send a password reset email
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset code sent successfully
+ */
 router.post('/forgot', upload.none(), async (req, res) => {
     const { username } = req.body;
 
@@ -109,6 +198,26 @@ router.post('/forgot', upload.none(), async (req, res) => {
     res.status(200).send('Password reset code sent successfully');
 });
 
+/**
+ * @swagger
+ * /reset:
+ *   post:
+ *     summary: Reset a user's password
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *               code:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ */
 router.post('/reset', upload.none(), async (req, res) => {
     const { password, code } = req.body;
 

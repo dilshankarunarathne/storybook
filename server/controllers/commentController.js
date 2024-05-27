@@ -9,6 +9,21 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
+/**
+ * @swagger
+ * /comment:
+ *   get:
+ *     summary: Retrieves all comments for a specific post
+ *     parameters:
+ *       - in: query
+ *         name: post
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: The list of comments
+ */
 router.get('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.query;
 
@@ -27,6 +42,26 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
     res.json(comments);
 });
 
+/**
+ * @swagger
+ * /comment:
+ *   post:
+ *     summary: Add a comment to a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               post:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Comment added successfully
+ */
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
     const { post, text } = req.body;
     const user = req.user.username;
@@ -52,6 +87,26 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(201).send('Comment added successfully');
 });
 
+/**
+ * @swagger
+ * /comment:
+ *   put:
+ *     summary: Update a comment
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Comment updated successfully
+ */
 router.put('/', upload.none(), authMiddleware, async (req, res) => {
     const { id, text } = req.body;
     const user = req.user.username;
@@ -78,6 +133,24 @@ router.put('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(200).send('Comment updated successfully');
 });
 
+/**
+ * @swagger
+ * /comment:
+ *   delete:
+ *     summary: Delete a comment
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Comment deleted successfully
+ */
 router.delete('/', upload.none(), authMiddleware, async (req, res) => {
     const { id } = req.body;
     const user = req.user.username;
