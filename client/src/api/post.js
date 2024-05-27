@@ -1,8 +1,8 @@
+const token = localStorage.getItem('token');
+
 const API_URL = 'http://localhost:8000/post';
 
 export const createPost = async (formData) => {
-    const token = localStorage.getItem('token');
-
     const response = await fetch(API_URL, {
         method: 'POST',
         body: formData,
@@ -28,4 +28,25 @@ export const createPost = async (formData) => {
     } else {
         return await response.text();
     }
+};
+
+export const editPost = async (postId, newPostText) => {
+    const formData = new FormData();
+    formData.append('id', postId);
+    formData.append('text', newPostText);
+
+    const response = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    });
+
+    if (!response.ok) {
+        const message = await response.text();
+        throw new Error(`Error during post editing: ${message}`);
+    }
+
+    return await response.json();
 };
