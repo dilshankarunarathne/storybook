@@ -85,6 +85,7 @@ router.get('/post', upload.none(), async (req, res) => {
     res.json(post);
 });
 
+
 router.post('/post', upload.single('image'), authMiddleware, async (req, res) => {
     const { text } = req.body;
     let image = null;
