@@ -47,7 +47,7 @@ export const resetPassword = async (password, code) => {
     });
 
     if (response.ok) {
-        return await response.json();
+        return await response.text();
     } else {
         throw new Error('Error during password reset');
     }

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useLocation,useHistory} from 'react-router-dom';
 
 import {resetPassword} from '../../api/users';
 
@@ -8,6 +8,7 @@ import './reset.css';
 function ResetPassword() {
     const [code, setCode] = useState(null);
     const location = useLocation();
+    const history = useHistory();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -38,8 +39,11 @@ function ResetPassword() {
 
         try {
             await resetPassword(newPassword, code);
-            alert('Password has been reset successfully!');
+            alert('Password has been reset successfully! You will be redirected.');
             document.getElementById('resetForm').reset();
+            setTimeout(() => {
+                history.push('/login');
+            }, 1000);
         } catch (error) {
             alert('Error during password reset');
         }
