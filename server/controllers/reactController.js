@@ -9,6 +9,7 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
+
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.body;
     const user = req.user.username;
@@ -30,6 +31,7 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
 
     res.status(201).send('React added successfully');
 });
+
 
 router.delete('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.body;
