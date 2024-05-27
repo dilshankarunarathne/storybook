@@ -181,6 +181,7 @@ router.put('/post', upload.none(), authMiddleware, async (req, res) => {
     res.status(200).send('Post updated successfully');
 });
 
+
 router.delete('/post', upload.none(), authMiddleware, async (req, res) => {
     const { id } = req.body;
 
