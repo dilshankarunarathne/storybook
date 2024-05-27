@@ -17,8 +17,8 @@ export default function Post({post}) {
         imageSrc = URL.createObjectURL(blob);
     }
 
+    const [newComment, setNewComment] = useState("");
     const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
     const [showOptions, setShowOptions] = useState(false);
     const [currentCommentId, setCurrentCommentId] = useState(null);
     const [editCommentText, setEditCommentText] = useState('');
@@ -105,9 +105,9 @@ export default function Post({post}) {
 
     const handleNewCommentSubmit = async (e) => {
         e.preventDefault();
-        await addComment(post.post_id, newComment);
-        setNewComment(prevComment => '');
-        await fetchComments();
+        const addedComment = await addComment(post.post_id, newComment);
+        setNewComment('');
+        setComments(prevComments => [...prevComments, addedComment]);
     };
 
     const handlePostOptions = () => {
