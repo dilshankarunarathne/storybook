@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-import { editProfile } from '../../api/profile';
+import {editProfile} from '../../api/profile';
 
 import './editProfile.css';
 
@@ -28,23 +28,23 @@ function EditProfile() {
             <form onSubmit={handleSubmit}>
                 <label>
                     First Name:
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
                 </label>
                 <label>
                     Last Name:
-                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                 </label>
                 <label>
                     Date of Birth:
-                    <input type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
+                    <input type="date" value={dob} onChange={(e) => setDob(e.target.value)}/>
                 </label>
                 <label>
                     Bio:
-                    <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+                    <textarea value={bio} onChange={(e) => setBio(e.target.value)}/>
                 </label>
                 <label>
                     Profile Picture:
-                    <input type="file" onChange={(e) => setProfilePicture(e.target.files[0])} />
+                    <input type="file" onChange={(e) => setProfilePicture(e.target.files[0])}/>
                 </label>
                 <button type="submit">Update Profile</button>
             </form>

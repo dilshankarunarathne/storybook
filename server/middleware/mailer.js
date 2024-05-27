@@ -20,9 +20,9 @@ let transporter = nodemailer.createTransport(config);
 function sendEmail(to, subject, html, attachments = []) {
     let message = {
         from: 'maleeshasparrow@gmail.com',
-        to: to, 
-        subject: subject, 
-        html: html, 
+        to: to,
+        subject: subject,
+        html: html,
         attachments: attachments
     };
 

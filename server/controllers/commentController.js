@@ -25,7 +25,7 @@ const upload = multer();
  *         description: The list of comments
  */
 router.get('/', upload.none(), authMiddleware, async (req, res) => {
-    const { post } = req.query;
+    const {post} = req.query;
 
     if (!post) {
         return res.status(400).send('Post id is required');
@@ -37,7 +37,7 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
         return res.status(404).send('Post not found');
     }
 
-    const comments = await Comment.findAll({ where: { post } });
+    const comments = await Comment.findAll({where: {post}});
 
     res.json(comments);
 });
@@ -63,7 +63,7 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
  *         description: Comment added successfully
  */
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
-    const { post, text } = req.body;
+    const {post, text} = req.body;
     const user = req.user.username;
 
     if (!user || !post) {
@@ -108,7 +108,7 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
  *         description: Comment updated successfully
  */
 router.put('/', upload.none(), authMiddleware, async (req, res) => {
-    const { id, text } = req.body;
+    const {id, text} = req.body;
     const user = req.user.username;
 
     if (!user || !id) {
@@ -119,7 +119,7 @@ router.put('/', upload.none(), authMiddleware, async (req, res) => {
         return res.status(400).send('Text is required');
     }
 
-    const comment = await Comment.findOne({ where: { comment_id: id, user } });
+    const comment = await Comment.findOne({where: {comment_id: id, user}});
 
     if (!comment) {
         return res.status(404).send('Comment not found');
@@ -152,14 +152,14 @@ router.put('/', upload.none(), authMiddleware, async (req, res) => {
  *         description: Comment deleted successfully
  */
 router.delete('/', upload.none(), authMiddleware, async (req, res) => {
-    const { id } = req.body;
+    const {id} = req.body;
     const user = req.user.username;
 
     if (!user || !id) {
         return res.status(400).send('Comment id is required and you must be logged in');
     }
 
-    const comment = await Comment.findOne({ where: { comment_id: id, user } });
+    const comment = await Comment.findOne({where: {comment_id: id, user}});
 
     if (!comment) {
         return res.status(404).send('Comment not found');

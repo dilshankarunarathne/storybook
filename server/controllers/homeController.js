@@ -13,7 +13,7 @@ const router = express.Router();
 const uploadDir = path.join(__dirname, 'uploads');
 
 if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
+    fs.mkdirSync(uploadDir, {recursive: true});
 }
 
 const storage = multer.diskStorage({
@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
     }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({storage: storage})
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ router.get('/', authMiddleware, async (req, res) => {
  *         description: The post data
  */
 router.get('/post', upload.none(), async (req, res) => {
-    const { id } = req.body;
+    const {id} = req.body;
 
     const post = await Post.findByPk(id);
 
@@ -107,7 +107,7 @@ router.get('/post', upload.none(), async (req, res) => {
  *         description: Post created successfully
  */
 router.post('/post', upload.single('image'), authMiddleware, async (req, res) => {
-    const { text } = req.body;
+    const {text} = req.body;
     let image = null;
 
     if (req.file) {
@@ -154,7 +154,7 @@ router.post('/post', upload.single('image'), authMiddleware, async (req, res) =>
  *         description: Post updated successfully
  */
 router.put('/post', upload.none(), authMiddleware, async (req, res) => {
-    const { id, text, image } = req.body;
+    const {id, text, image} = req.body;
 
     if (!id) {
         return res.status(400).send('Post id is required');
@@ -200,7 +200,7 @@ router.put('/post', upload.none(), authMiddleware, async (req, res) => {
  *         description: Post deleted successfully
  */
 router.delete('/post', upload.none(), authMiddleware, async (req, res) => {
-    const { id } = req.body;
+    const {id} = req.body;
 
     if (!id) {
         return res.status(400).send('Post id is required');

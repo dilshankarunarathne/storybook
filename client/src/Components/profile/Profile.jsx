@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
-import { getCurrentUser } from '../../api/profile';
+import {getCurrentUser} from '../../api/profile';
 
 import Topbar from "../../Components/topbar/Topbar";
 
@@ -49,7 +49,7 @@ export default function Profile() {
                             <span className="profileInfoDesc">{user?.bio}</span>
                         </div>
                     </div>
-                    <br />
+                    <br/>
                     <div className="profileRightBottom">
                         <div className="profileDetails">
                             <p><strong>Username:</strong> {user?.username}</p>

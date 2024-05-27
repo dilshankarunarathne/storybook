@@ -1,10 +1,10 @@
-import {useState,useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {MoreVert} from "@mui/icons-material"
 
-import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
-import {editPost, deletePost} from '../../api/post';
+import {addComment, deleteComment, editComment, getComments} from '../../api/comments';
+import {deletePost, editPost} from '../../api/post';
 import {addReaction} from '../../api/reaction';
-import {getCurrentUser, getProfile} from '../../api/profile';
+import {getProfile} from '../../api/profile';
 
 import "./post.css"
 
@@ -158,7 +158,8 @@ export default function Post({post}) {
                         <MoreVert onClick={handlePostOptions}/>
                         {showPostOptions && (
                             <div className="postOptionsPopup">
-                                <input type="text" value={editPostText} onChange={(e) => setEditPostText(e.target.value)} />
+                                <input type="text" value={editPostText}
+                                       onChange={(e) => setEditPostText(e.target.value)}/>
                                 <button onClick={handleEditPost}>Edit Post</button>
                                 <button onClick={handleDeletePost}>Delete Post</button>
                             </div>
@@ -166,12 +167,13 @@ export default function Post({post}) {
                     </div>
                 </div>
                 <div className="postCenter">
-                <span className="postText">{post.text}</span>
+                    <span className="postText">{post.text}</span>
                     {post.image && <img className="postImg" src={imageSrc} alt=""/>}
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img className="likeIcon" src="assets/like1.jpg" alt="" onClick={handleAddReaction}/> <span className="postlikeCounter">{post.likes_count} People like it</span>
+                        <img className="likeIcon" src="assets/like1.jpg" alt="" onClick={handleAddReaction}/> <span
+                        className="postlikeCounter">{post.likes_count} People like it</span>
                     </div>
                     <div className="postBottomRight">
                         <span className="postCommentText" onClick={fetchComments}>{post.comments_count} comments</span>
@@ -192,7 +194,8 @@ export default function Post({post}) {
                         <span>{comment.text}</span>
                         {currentCommentId === comment.comment_id && (
                             <div className="commentOptionsPopup">
-                                <input type="text" value={editCommentText} onChange={(e) => setEditCommentText(e.target.value)} />
+                                <input type="text" value={editCommentText}
+                                       onChange={(e) => setEditCommentText(e.target.value)}/>
                                 <button onClick={handleEditComment}>Change Comment</button>
                                 <button onClick={handleDeleteComment}>Delete Comment</button>
                             </div>
