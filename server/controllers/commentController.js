@@ -54,7 +54,26 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(201).send('Comment added successfully');
 });
 
-
+/**
+ * @swagger
+ * /comment:
+ *   put:
+ *     summary: Update a comment
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Comment updated successfully
+ */
 router.put('/', upload.none(), authMiddleware, async (req, res) => {
     const { id, text } = req.body;
     const user = req.user.username;
