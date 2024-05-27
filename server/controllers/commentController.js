@@ -10,7 +10,7 @@ const router = express.Router();
 const upload = multer();
 
 router.get('/', upload.none(), authMiddleware, async (req, res) => {
-    const { post } = req.body;
+    const { post } = req.query;
 
     if (!post) {
         return res.status(400).send('Post id is required');
