@@ -198,6 +198,26 @@ router.post('/forgot', upload.none(), async (req, res) => {
     res.status(200).send('Password reset code sent successfully');
 });
 
+/**
+ * @swagger
+ * /reset:
+ *   post:
+ *     summary: Reset a user's password
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *               code:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ */
 router.post('/reset', upload.none(), async (req, res) => {
     const { password, code } = req.body;
 
