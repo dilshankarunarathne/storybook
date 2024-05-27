@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import {MoreVert} from "@mui/icons-material"
 
-import {getComments, addComment, deleteComment} from '../../api/comments';
+import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
 
 import "./post.css"
 
@@ -18,6 +18,7 @@ export default function Post({post}) {
     const [newComment, setNewComment] = useState('');
     const [showOptions, setShowOptions] = useState(false);
     const [currentCommentId, setCurrentCommentId] = useState(null);
+    const [editCommentText, setEditCommentText] = useState('');
 
     useEffect(() => {
         // fetchComments(); // TODO: bug - auto load new comments
@@ -37,10 +38,15 @@ export default function Post({post}) {
         setShowOptions(true);
     };
 
-    const handleEditComment = () => {
-        // TODO: Implement edit comment functionality here
-        console.log(`Edit comment ${currentCommentId}`);
-        setShowOptions(false);
+    const handleEditComment = async () => {
+        try {
+            await editComment(currentCommentId, editCommentText);
+            console.log(`Comment ${currentCommentId} edited.`);
+            setShowOptions(false);
+            await fetchComments();
+        } catch (error) {
+            console.error(`Error during comment editing: ${error.message}`);
+        }
     };
 
     const handleDeleteComment = async () => {
@@ -105,7 +111,8 @@ export default function Post({post}) {
                         <span>{comment.text}</span>
                         {currentCommentId === comment.comment_id && (
                             <div className="commentOptionsPopup">
-                                <button onClick={handleEditComment}>Edit Comment</button>
+                                <input type="text" value={editCommentText} onChange={(e) => setEditCommentText(e.target.value)} />
+                                <button onClick={handleEditComment}>Change Comment</button>
                                 <button onClick={handleDeleteComment}>Delete Comment</button>
                             </div>
                         )}

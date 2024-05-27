@@ -59,3 +59,24 @@ export const deleteComment = async (commentId) => {
 
     return await response.json();
 };
+
+export const editComment = async (commentId, newCommentText) => {
+    const formData = new FormData();
+    formData.append('id', commentId);
+    formData.append('text', newCommentText);
+
+    const response = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    });
+
+    if (!response.ok) {
+        const message = await response.text();
+        throw new Error(`Error during comment editing: ${message}`);
+    }
+
+    return await response.json();
+};
