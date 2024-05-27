@@ -15,7 +15,7 @@
       left: 0;
       right: 0;
       margin: auto;
-      top: 230px;
+      top: 30px !important;
       border: 3px solid rgb(255, 254, 254);
       padding: 20px;
   }
