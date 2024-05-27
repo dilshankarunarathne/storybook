@@ -9,6 +9,7 @@ import Login from "./Components/login/Login";
 import Profile from "./Components/profile/Profile";
 import ResetPassword from "./pages/reset/Reset";
 import EditProfile from "./Components/edit_profile/EditProfile";
+import LandingPage from './Components/landingPage/LandingPage';
 
 function App() {
     return (
@@ -16,7 +17,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route path="/register" component={Register}/>
-                    <Route path="/login" component={Login}/>
+                    <Route path="/landingPage" component={LandingPage}/>
                     <Route path="/reset" component={ResetPassword}/>
                     <PrivateRoute path="/profile" component={Profile}/>
                     <PrivateRoute path="/edit" component={EditProfile}/>
