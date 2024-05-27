@@ -16,8 +16,12 @@ export default function Topbar() {
     useEffect(() => {
         if (!loading) {
             const fetchUser = async () => {
-                const userData = await getCurrentUser();
-                setUser(userData);
+                try {
+                    const userData = await getCurrentUser();
+                    setUser(userData);
+                } catch (error) {
+                    console.error(error);
+                }
             };
             fetchUser();
         }

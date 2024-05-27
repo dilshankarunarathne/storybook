@@ -3,6 +3,16 @@ const token = localStorage.getItem('token');
 const API_URL = 'http://localhost:8000/profile';
 
 export const getCurrentUser = async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(getCurrentUser());
+            }, 1000);
+        });
+    }
+
     const response = await fetch(API_URL, {
         method: 'GET',
         headers: {
