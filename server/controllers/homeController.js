@@ -130,7 +130,29 @@ router.post('/post', upload.single('image'), authMiddleware, async (req, res) =>
     res.status(201).send('Post created successfully');
 });
 
-
+/**
+ * @swagger
+ * /post:
+ *   put:
+ *     summary: Update a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Post updated successfully
+ */
 router.put('/post', upload.none(), authMiddleware, async (req, res) => {
     const { id, text, image } = req.body;
 
