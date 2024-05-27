@@ -40,6 +40,7 @@ router.get('/', authMiddleware, async (req, res) => {
     res.json(user);
 });
 
+
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
   const { username } = req.body;
 
