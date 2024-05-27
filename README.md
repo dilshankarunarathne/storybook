@@ -204,7 +204,7 @@ The group members are:
   - Client Application
 - EUSL/TC/IS/2019/COM/35&nbsp;&nbsp; [Madhawa](https://github.com/MadhawaRathnayaka)
   - Documentation
-- EUSL/TC/IS/2019/COM/11&nbsp;&nbsp; [Abiram]()
+- EUSL/TC/IS/2019/COM/11&nbsp;&nbsp; [Abiram](https://github.com/AbiramRam)
   - Client Application
 - EUSL/TC/IS/2019/COM/23&nbsp;&nbsp; [Sakaniya](https://github.com/sakapanchu)
   - Client Application
