@@ -14,12 +14,21 @@ The API documentation is available at [Postman](https://www.postman.com/karunara
 If you'd like to contribute to this project, please check the contribution guidelines for more information.  
 The group members are: 
 - EUSL/TC/IS/2019/COM/24&nbsp;&nbsp;  [Dilshan](https://github.com/dilshankarunarathne)
+  - Server Application 
+  - Database
+  - Client-Server Integration
 - EUSL/TC/IS/2019/COM/109 [Tharuka](https://github.com/NadeeTharuka)
+  - Client Application
 - EUSL/TC/IS/2019/COM/69&nbsp;&nbsp; [Isuru](https://github.com/isurudayananda)
+  - Client Application
 - EUSL/TC/IS/2019/COM/49&nbsp;&nbsp; [Udari](https://github.com/UdariAdhikaram)
+  - Client Application
 - EUSL/TC/IS/2019/COM/35&nbsp;&nbsp; [Madhawa](https://github.com/MadhawaRathnayaka)
+  - Documentation
 - EUSL/TC/IS/2019/COM/11&nbsp;&nbsp; [Abiram]()
+  - Client Application
 - EUSL/TC/IS/2019/COM/23&nbsp;&nbsp; [Sakaniya](https://github.com/sakapanchu)
+  - Client Application
 
 ## License
 
