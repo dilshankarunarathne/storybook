@@ -57,6 +57,7 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
   res.json(user);
 });
 
+
 router.put('/', upload.single('profile_picture'), authMiddleware, async (req, res) => {
     const { first_name, last_name, dob, bio } = req.body;
     const user = req.user.username;
