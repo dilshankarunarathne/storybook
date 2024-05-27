@@ -1,54 +1,45 @@
-.edit_profile{
-    display: flex;
-}
-
-.edit_profileRight{
-    flex: 9;
-}
-
-.edit_profileRightBottom{
-    display:flex;
-}
-
-.edit_profileCover{
-    height: 320px;
-    position: relative;
-}
-
-.edit_profileCoverImg{
+.EditProfile {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.edit_profileUserImg{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 150px;
-    border: 3px solid white;
+.EditProfile h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.edit_profileInfo{
+.EditProfile form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.edit_profileInfoName{
-    font-size: 24px;
+.EditProfile form label {
+    margin-bottom: 10px;
 }
 
-.edit_profileInfoDesc{
-    font-weight: 300;
+.EditProfile form input[type="text"],
+.EditProfile form input[type="date"],
+.EditProfile form textarea,
+.EditProfile form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.edit_profileRightBottom{
-    display: flex;
+.EditProfile form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.EditProfile form button:hover {
+    background-color: #0056b3;
 }

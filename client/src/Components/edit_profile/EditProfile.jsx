@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { editProfile } from '../../api/profile';
 
+import './editProfile.css';
+
 function EditProfile() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -21,7 +23,7 @@ function EditProfile() {
     };
 
     return (
-        <div>
+        <div className="EditProfile">
             <h2>Edit Profile</h2>
             <form onSubmit={handleSubmit}>
                 <label>
