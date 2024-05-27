@@ -32,6 +32,160 @@ To install and run StoryBook, follow these steps:
 4. Start the server: `cd server && npm start`
 5. Start the client: `cd client && npm start`
 
+## Project Structure
+
+```
+storybook-master
+│   .gitignore
+│   docker-compose.yml
+│   LICENSE
+│   README.md
+│   swagger.json
+│
+├───.github
+│       FUNDING.yml
+│
+├───client
+│   │   .gitignore
+│   │   .gitkeep
+│   │   Dockerfile
+│   │   package-lock.json
+│   │   package.json
+│   │   README.md
+│   │
+│   ├───public
+│   │   │   index.html
+│   │   │   style.css
+│   │   │
+│   │   └───assets
+│   │           avatar_default.jpg
+│   │           cover1.jpg
+│   │           cover2.jpg
+│   │           email-veri1.jpg
+│   │           like.png
+│   │           like1.jpg
+│   │
+│   └───src
+│       │   App.css
+│       │   App.js
+│       │   App.test.js
+│       │   index.css
+│       │   index.js
+│       │   logo.svg
+│       │   reportWebVitals.js
+│       │   setupTests.js
+│       │
+│       ├───api
+│       │       comments.js
+│       │       post.js
+│       │       profile.js
+│       │       reaction.js
+│       │       users.js
+│       │
+│       ├───Components
+│       │   ├───edit_profile
+│       │   │       editProfile.css
+│       │   │       EditProfile.jsx
+│       │   │
+│       │   ├───feed
+│       │   │       feed.css
+│       │   │       Feed.jsx
+│       │   │
+│       │   ├───landingPage
+│       │   │       landingPage.css
+│       │   │       LandingPage.jsx
+│       │   │
+│       │   ├───login
+│       │   │       login.css
+│       │   │       Login.jsx
+│       │   │
+│       │   ├───post
+│       │   │       post.css
+│       │   │       Post.jsx
+│       │   │
+│       │   ├───profile
+│       │   │       profile.css
+│       │   │       Profile.jsx
+│       │   │
+│       │   ├───register
+│       │   │       register.css
+│       │   │       Register.jsx
+│       │   │
+│       │   ├───share
+│       │   │       share.css
+│       │   │       Share.jsx
+│       │   │
+│       │   └───topbar
+│       │           topbar.css
+│       │           Topbar.jsx
+│       │
+│       ├───context
+│       │       AuthContext.js
+│       │       AuthProvider.js
+│       │       PrivateRoute.js
+│       │
+│       └───pages
+│           ├───forgot
+│           │       forgot.css
+│           │       Forgot.jsx
+│           │
+│           ├───home
+│           │       home.css
+│           │       Home.jsx
+│           │
+│           ├───reset
+│           │       reset.css
+│           │       Reset.jsx
+│           │
+│           └───success
+│                   success.css
+│                   Success.jsx
+│
+├───database
+│       .gitkeep
+│       database.sql
+│       triggers.sql
+│
+├───docs
+│       .gitkeep
+│       index.html
+│
+└───server
+│   .gitignore
+│   app.js
+│   db.js
+│   Dockerfile
+│   package-lock.json
+│   package.json
+│   process.env
+│   README.md
+│
+├───controllers
+│   │   authController.js
+│   │   commentController.js
+│   │   homeController.js
+│   │   profileController.js
+│   │   reactController.js
+│   │
+│   └───uploads
+│           .gitkeep
+│
+├───middleware
+│       authMiddleware.js
+│       mailer.js
+│
+├───models
+│       Comment.js
+│       Post.js
+│       React.js
+│       User.js
+│
+└───static
+    .gitkeep
+    account-verification-mail.html
+    forgot-password-mail.html
+```
+
 ## Contributions
 
 We welcome contributions to this project. Please check the contribution guidelines for more information.
