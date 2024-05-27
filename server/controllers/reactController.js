@@ -49,7 +49,24 @@ router.post('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(201).send('React added successfully');
 });
 
-
+/**
+ * @swagger
+ * /react:
+ *   delete:
+ *     summary: Remove a reaction from a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               post:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: React deleted successfully
+ */
 router.delete('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.body;
     const user = req.user.username;
