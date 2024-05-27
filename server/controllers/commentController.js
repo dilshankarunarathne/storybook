@@ -28,7 +28,26 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
     res.json(comments);
 });
 
-
+/**
+ * @swagger
+ * /comment:
+ *   post:
+ *     summary: Add a comment to a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               post:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Comment added successfully
+ */
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
     const { post, text } = req.body;
     const user = req.user.username;
