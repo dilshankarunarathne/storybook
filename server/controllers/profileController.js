@@ -40,7 +40,24 @@ router.get('/', authMiddleware, async (req, res) => {
     res.json(user);
 });
 
-
+/**
+ * @swagger
+ * /profile:
+ *   post:
+ *     summary: Retrieves the profile of a specific user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: The profile of the user
+ */
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
   const { username } = req.body;
 
