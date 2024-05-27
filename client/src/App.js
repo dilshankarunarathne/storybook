@@ -8,6 +8,7 @@ import Register from './Components/register/Register';
 import Login from "./Components/login/Login";
 import Profile from "./Components/profile/Profile";
 import ResetPassword from "./pages/reset/Reset";
+import EditProfile from "./Components/edit_profile/EditProfile";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/login" component={Login}/>
                     <Route path="/reset" component={ResetPassword}/>
                     <PrivateRoute path="/profile" component={Profile}/>
+                    <PrivateRoute path="/edit" component={EditProfile}/>
                     <PrivateRoute path="/" component={Home}/>
                 </Switch>
             </Router>
