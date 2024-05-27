@@ -5,7 +5,8 @@
 
 ## Overview
 
-Storybook is a social media web application built as a group project for CS3122 - Advanced Database Management Systems. This project demonstrates the application of database concepts and technologies in a real-world context. 
+Storybook is a social media web application built as a group project for CS3122 - Advanced Database Management Systems.
+This project demonstrates the application of database concepts and technologies in a real-world context.
 
 ## Features
 
@@ -15,7 +16,6 @@ Users can:
 - Share posts with text and optional images
 - Comment on other users' posts
 - Like posts
-- The system automatically deletes posts after a set timeframe
 
 ## API Documentation
 
@@ -35,8 +35,6 @@ To install and run StoryBook, follow these steps:
 ## Contributions
 
 We welcome contributions to this project. Please check the contribution guidelines for more information.
-
-## Team
 
 The group members are:
 
@@ -60,9 +58,9 @@ The group members are:
 ## License
 
 This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].  
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]  
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]  
 
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
