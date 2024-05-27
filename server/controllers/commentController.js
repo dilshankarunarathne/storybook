@@ -9,6 +9,7 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
+
 router.get('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.query;
 
