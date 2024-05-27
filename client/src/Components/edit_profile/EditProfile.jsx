@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { editProfile } from '../../api/profile';
+
 function EditProfile() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -10,14 +12,12 @@ function EditProfile() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const formData = new FormData();
-        formData.append('first_name', firstName);
-        formData.append('last_name', lastName);
-        formData.append('dob', dob);
-        formData.append('bio', bio);
-        formData.append('profile_picture', profilePicture);
-
-
+        try {
+            await editProfile(firstName, lastName, dob, bio, profilePicture);
+            alert('Profile updated successfully');
+        } catch (error) {
+            alert('Error during profile update');
+        }
     };
 
     return (
