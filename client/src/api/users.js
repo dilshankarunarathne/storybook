@@ -52,3 +52,19 @@ export const resetPassword = async (password, code) => {
         throw new Error('Error during password reset');
     }
 };
+
+export const requestPasswordReset = async (username) => {
+    const formData = new FormData();
+    formData.append('username', username);
+
+    const response = await fetch(`${API_URL}/forgot`, {
+        method: 'POST',
+        body: formData
+    });
+
+    if (response.ok) {
+        return await response.json();
+    } else {
+        throw new Error('Error during password reset request');
+    }
+};
