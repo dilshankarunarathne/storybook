@@ -3,6 +3,7 @@ import {MoreVert} from "@mui/icons-material"
 
 import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
 import {editPost, deletePost} from '../../api/post';
+import {addReaction} from '../../api/reaction';
 
 import "./post.css"
 
@@ -98,6 +99,16 @@ export default function Post({post}) {
         }
     };
 
+    const handleAddReaction = async () => {
+        try {
+            await addReaction(post.post_id);
+            console.log(`Reaction added to post ${post.post_id}.`);
+            // TODO: Refresh the post reactions
+        } catch (error) {
+            console.error(`Error during reaction addition: ${error.message}`);
+        }
+    };
+
     return (
         <div className="post">
             <div className="postWrapper">
@@ -124,8 +135,7 @@ export default function Post({post}) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img className="likeIcon" src="assets/like1.jpg" alt=""/>
-                        <span className="postlikeCounter">{post.likes_count} People like it</span>
+                        <img className="likeIcon" src="assets/like1.jpg" alt="" onClick={handleAddReaction}/> <span className="postlikeCounter">{post.likes_count} People like it</span>
                     </div>
                     <div className="postBottomRight">
                         <span className="postCommentText" onClick={fetchComments}>{post.comments_count} comments</span>
