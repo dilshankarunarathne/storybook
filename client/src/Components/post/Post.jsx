@@ -4,6 +4,7 @@ import {MoreVert} from "@mui/icons-material"
 import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
 import {editPost, deletePost} from '../../api/post';
 import {addReaction} from '../../api/reaction';
+import {getCurrentUser} from '../../api/profile';
 
 import "./post.css"
 
@@ -23,10 +24,33 @@ export default function Post({post}) {
     const [editCommentText, setEditCommentText] = useState('');
     const [showPostOptions, setShowPostOptions] = useState(false);
     const [editPostText, setEditPostText] = useState('');
+    const [profilePicture, setProfilePicture] = useState('');
 
     useEffect(() => {
         // fetchComments(); // TODO: bug - auto load new comments
     }, [comments]);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getCurrentUser();
+
+                const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
+                let binary = '';
+                if (byteArray) {
+                    const len = byteArray.byteLength;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                }
+                setProfilePicture(byteArray ? `data:image/jpeg;base64,${btoa(binary)}` : '/assets/avatar_default.jpg');
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProfile();
+    }, []);
 
     const fetchComments = async () => {
         if (post && post.post_id) {
@@ -114,7 +138,7 @@ export default function Post({post}) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
+                        <img className="postProfileImg" src={profilePicture} alt=""/>
                         <span className="postUsername">{post.user}</span>
                         <span className="postDate">{new Date(post.created).toDateString()}</span>
                     </div>
