@@ -10,6 +10,7 @@ export default function Share() {
     const [text, setText] = useState('');
     const [image, setImage] = useState(null);
     const [firstName, setFirstName] = useState('');
+    const [profilePicture, setProfilePicture] = useState('');
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -17,6 +18,16 @@ export default function Share() {
                 const username = localStorage.getItem('username');
                 const profile = await getCurrentUser();
                 setFirstName(profile.first_name);
+
+                const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
+                let binary = '';
+                if (byteArray) {
+                    const len = byteArray.byteLength;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                }
+                setProfilePicture(byteArray ? `data:image/jpeg;base64,${btoa(binary)}` : '/assets/avatar_default.jpg');
             } catch (error) {
                 console.error(error);
             }
@@ -45,7 +56,7 @@ export default function Share() {
         <form className="share" onSubmit={handleSubmit}>
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img className="shareProfileImg" src="/assets/4.jpg" alt=""/>
+                    <img className="shareProfileImg" src={profilePicture} alt=""/>
                     <input
                         placeholder={`What's in your mind ${firstName}?`}
                         type="text"
