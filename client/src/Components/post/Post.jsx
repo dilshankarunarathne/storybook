@@ -33,7 +33,7 @@ export default function Post({post}) {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const profile = await getCurrentUser();
+                const profile = await getProfile(post.user);
 
                 const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
                 let binary = '';
@@ -50,7 +50,7 @@ export default function Post({post}) {
         };
 
         fetchProfile();
-    }, []);
+    }, [post.user]);
 
     const fetchComments = async () => {
         if (post && post.post_id) {
