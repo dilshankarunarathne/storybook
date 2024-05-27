@@ -9,7 +9,24 @@ const {Op} = require("sequelize");
 const router = express.Router();
 const upload = multer();
 
-
+/**
+ * @swagger
+ * /react:
+ *   post:
+ *     summary: Add a reaction to a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               post:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: React added successfully
+ */
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
     const { post } = req.body;
     const user = req.user.username;
