@@ -7,7 +7,7 @@ import './forgot.css';
 
 export default function ForgotPassword() {
     const [username, setUsername] = useState('');
-    
+
     const history = useHistory();
 
     const handleRequestReset = async (e) => {
