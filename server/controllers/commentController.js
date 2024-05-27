@@ -28,6 +28,7 @@ router.get('/', upload.none(), authMiddleware, async (req, res) => {
     res.json(comments);
 });
 
+
 router.post('/', upload.none(), authMiddleware, async (req, res) => {
     const { post, text } = req.body;
     const user = req.user.username;
