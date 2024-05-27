@@ -1,4 +1,7 @@
 import {MoreVert} from "@mui/icons-material"
+import {useState} from 'react';
+
+import {getComments, addComment} from '../../api/comments';
 
 import "./post.css"
 
@@ -9,6 +12,29 @@ export default function Post({post}) {
         const blob = new Blob([buffer], {type: 'image/jpeg'});
         imageSrc = URL.createObjectURL(blob);
     }
+
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState('');
+
+    const fetchComments = async () => {
+    if (post && post.post_id) {
+        const fetchedComments = await getComments(post.post_id);
+        setComments(fetchedComments);
+    } else {
+        console.error('Post or post id is undefined');
+    }
+};
+
+    const handleNewCommentChange = (e) => {
+        setNewComment(e.target.value);
+    };
+
+    const handleNewCommentSubmit = async (e) => {
+        e.preventDefault();
+        await addComment(post.post_id, newComment);
+        setNewComment('');
+        fetchComments();
+    };
 
     return (
         <div className="post">
@@ -33,9 +59,18 @@ export default function Post({post}) {
                         <span className="postlikeCounter">{post.likes_count} People like it</span>
                     </div>
                     <div className="postBottomRight">
-                        <span className="postCommentText">{post.comments_count} comments</span>
+                        <span className="postCommentText" onClick={fetchComments}>{post.comments_count} comments</span>
                     </div>
                 </div>
+                {comments.map(comment => (
+                    <div key={comment.id}>
+                        <span>{comment.text}</span>
+                    </div>
+                ))}
+                <form onSubmit={handleNewCommentSubmit}>
+                    <input type="text" value={newComment} onChange={handleNewCommentChange} placeholder="Add a comment" />
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </div>
     )
