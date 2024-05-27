@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 24, 2024 at 02:49 PM
+-- Generation Time: May 27, 2024 at 11:04 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `created` timestamp NOT NULL,
   `last_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Triggers `comment`
@@ -67,13 +67,13 @@ CREATE TABLE IF NOT EXISTS `post` (
   `post_id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(20) NOT NULL,
   `text` varchar(1000) NOT NULL,
-  `image` blob,
+  `image` longblob,
   `created` timestamp NOT NULL,
   `last_modified` timestamp NULL DEFAULT NULL,
   `comments_count` int(11) NOT NULL DEFAULT '0',
   `likes_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Triggers `post`
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `react` (
   `user` varchar(20) NOT NULL,
   `post` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Triggers `react`
@@ -141,13 +141,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_name` varchar(20) NOT NULL,
   `dob` date NOT NULL,
   `bio` varchar(150) DEFAULT NULL,
-  `profile_picture` blob,
+  `profile_picture` mediumblob,
   `posts_count` int(11) NOT NULL DEFAULT '0',
   `confirmed` tinyint(1) DEFAULT '0',
   `verificationCode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
