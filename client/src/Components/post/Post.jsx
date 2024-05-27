@@ -4,6 +4,7 @@ import {MoreVert} from "@mui/icons-material"
 import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
 import {editPost, deletePost} from '../../api/post';
 import {addReaction} from '../../api/reaction';
+import {getCurrentUser, getProfile} from '../../api/profile';
 
 import "./post.css"
 
@@ -23,14 +24,49 @@ export default function Post({post}) {
     const [editCommentText, setEditCommentText] = useState('');
     const [showPostOptions, setShowPostOptions] = useState(false);
     const [editPostText, setEditPostText] = useState('');
+    const [profilePicture, setProfilePicture] = useState('');
 
     useEffect(() => {
         // fetchComments(); // TODO: bug - auto load new comments
     }, [comments]);
 
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile(post.user);
+
+                const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
+                let binary = '';
+                if (byteArray) {
+                    const len = byteArray.byteLength;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                }
+                setProfilePicture(byteArray ? `data:image/jpeg;base64,${btoa(binary)}` : '/assets/avatar_default.jpg');
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProfile();
+    }, [post.user]);
+
     const fetchComments = async () => {
         if (post && post.post_id) {
-            const fetchedComments = await getComments(post.post_id);
+            let fetchedComments = await getComments(post.post_id);
+            for (let comment of fetchedComments) {
+                const profile = await getProfile(comment.user);
+                const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
+                let binary = '';
+                if (byteArray) {
+                    const len = byteArray.byteLength;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                }
+                comment.profilePicture = byteArray ? `data:image/jpeg;base64,${btoa(binary)}` : '/assets/avatar_default.jpg';
+            }
             setComments(fetchedComments);
         } else {
             console.error('Post or post id is undefined');
@@ -114,7 +150,7 @@ export default function Post({post}) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
+                        <img className="postProfileImg" src={profilePicture} alt=""/>
                         <span className="postUsername">{post.user}</span>
                         <span className="postDate">{new Date(post.created).toDateString()}</span>
                     </div>
@@ -145,7 +181,7 @@ export default function Post({post}) {
                     <div key={comment.comment_id} className="comment">
                         <div className="postTop">
                             <div className="postTopLeft">
-                                <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
+                                <img className="postProfileImg" src={comment.profilePicture} alt=""/>
                                 <span className="postUsername">{comment.user}</span>
                                 <span className="postDate">{new Date(comment.created).toDateString()}</span>
                             </div>

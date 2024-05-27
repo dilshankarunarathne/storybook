@@ -27,6 +27,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Retrieves all posts from users other than the logged in user
+ *     responses:
+ *       200:
+ *         description: The list of posts
+ */
 router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
 
@@ -43,6 +52,21 @@ router.get('/', authMiddleware, async (req, res) => {
     res.json(posts);
 });
 
+/**
+ * @swagger
+ * /post:
+ *   get:
+ *     summary: Retrieves a specific post by id
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: The post data
+ */
 router.get('/post', upload.none(), async (req, res) => {
     const { id } = req.body;
 
@@ -61,6 +85,27 @@ router.get('/post', upload.none(), async (req, res) => {
     res.json(post);
 });
 
+/**
+ * @swagger
+ * /post:
+ *   post:
+ *     summary: Create a new post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Post created successfully
+ */
 router.post('/post', upload.single('image'), authMiddleware, async (req, res) => {
     const { text } = req.body;
     let image = null;
@@ -85,6 +130,29 @@ router.post('/post', upload.single('image'), authMiddleware, async (req, res) =>
     res.status(201).send('Post created successfully');
 });
 
+/**
+ * @swagger
+ * /post:
+ *   put:
+ *     summary: Update a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Post updated successfully
+ */
 router.put('/post', upload.none(), authMiddleware, async (req, res) => {
     const { id, text, image } = req.body;
 
@@ -113,6 +181,24 @@ router.put('/post', upload.none(), authMiddleware, async (req, res) => {
     res.status(200).send('Post updated successfully');
 });
 
+/**
+ * @swagger
+ * /post:
+ *   delete:
+ *     summary: Delete a post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Post deleted successfully
+ */
 router.delete('/post', upload.none(), authMiddleware, async (req, res) => {
     const { id } = req.body;
 

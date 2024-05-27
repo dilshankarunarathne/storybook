@@ -1,0 +1,19 @@
+.verification-success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.verification-success h1,
+.verification-success h2 {
+    color: #333;
+}
+
+.verification-success p {
+    color: #666;
+}

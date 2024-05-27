@@ -13,6 +13,8 @@
 .shareTop {
     display: flex;
     align-items: center;
+    margin-left: 18px;
+    margin-top: 10px;
 }
 
 .shareProfileImg {

@@ -1,0 +1,32 @@
+.landingPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .landingImg {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      top: 30px !important;
+      border: 3px solid rgb(255, 254, 254);
+      padding: 20px;
+  }
+  
+  .landingHeader {
+    margin-top: 20px; 
+    font-size: 28px; 
+  }
+  
+  .landingDesc {
+    margin-top: 10px; 
+    font-size: 18px; 
+  }
+  
