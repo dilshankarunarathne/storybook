@@ -50,3 +50,24 @@ export const editPost = async (postId, newPostText) => {
 
     return await response.json();
 };
+
+export const deletePost = async (postId) => {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('id', postId);
+
+    const response = await fetch(API_URL, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    });
+
+    if (!response.ok) {
+        const message = await response.text();
+        throw new Error(`Error during post deletion: ${message}`);
+    }
+
+    return await response.json();
+};
