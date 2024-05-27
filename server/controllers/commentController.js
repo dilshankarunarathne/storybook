@@ -81,7 +81,24 @@ router.put('/', upload.none(), authMiddleware, async (req, res) => {
     res.status(200).send('Comment updated successfully');
 });
 
-
+/**
+ * @swagger
+ * /comment:
+ *   delete:
+ *     summary: Delete a comment
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Comment deleted successfully
+ */
 router.delete('/', upload.none(), authMiddleware, async (req, res) => {
     const { id } = req.body;
     const user = req.user.username;
