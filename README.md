@@ -7,7 +7,7 @@ Storybook is a social media web application built as a group project for CS3122 
 
 ## API Documentation
 
-The API documentation is available at [Postman](https://www.postman.com/karunarathne/workspace/storybook/overview)
+The API playground is available at [Postman](https://www.postman.com/karunarathne/workspace/storybook/overview)
 
 ## Contributions
 
