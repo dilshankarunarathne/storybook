@@ -40,11 +40,6 @@ router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
 
     const posts = await Post.findAll({
-        where: {
-            user: {
-                [Op.ne]: username
-            }
-        },
         order: [
             ['created', 'DESC']
         ]
