@@ -27,7 +27,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Retrieves all posts from users other than the logged in user
+ *     responses:
+ *       200:
+ *         description: The list of posts
+ */
 router.get('/', authMiddleware, async (req, res) => {
     const username = req.user.username;
 
@@ -43,6 +51,7 @@ router.get('/', authMiddleware, async (req, res) => {
     });
     res.json(posts);
 });
+
 
 router.get('/post', upload.none(), async (req, res) => {
     const { id } = req.body;
