@@ -7,17 +7,21 @@ import './forgot.css';
 
 export default function ForgotPassword() {
     const [username, setUsername] = useState('');
+    
     const history = useHistory();
 
     const handleRequestReset = async (e) => {
         e.preventDefault();
         try {
             await requestPasswordReset(username);
-            alert('Password reset link has been sent to your email');
         } catch (error) {
             console.log(error.message);
-            alert('Error during password reset request');
+            // alert('Error during password reset request');
+
+            // TODO: show error message
         }
+
+        history.push('/landing');
     };
 
     const handleContinueToLogin = () => {

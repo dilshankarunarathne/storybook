@@ -19,7 +19,7 @@ function App() {
                 <Switch>
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/landingPage" component={LandingPage}/>
+                    <Route path="/landing" component={LandingPage}/>
                     <Route path="/reset" component={ResetPassword}/>
                     <Route path="/forgot" component={ForgotPassword}/>
                     <PrivateRoute path="/profile" component={Profile}/>
