@@ -75,7 +75,33 @@ router.post('/signup', upload.none(), async (req, res) => {
     res.status(201).send('User registered successfully');
 });
 
-
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Login a user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ */
 router.post('/login', upload.none(), async (req, res) => {
     const user = await User.findOne({ where: { username: req.body.username } });
 
