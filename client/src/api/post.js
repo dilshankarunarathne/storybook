@@ -69,5 +69,5 @@ export const deletePost = async (postId) => {
         throw new Error(`Error during post deletion: ${message}`);
     }
 
-    return await response.json();
+    return await response.text();
 };

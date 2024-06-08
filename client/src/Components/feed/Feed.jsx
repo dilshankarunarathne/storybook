@@ -30,6 +30,7 @@ export default function Feed() {
         <div className="feed">
             <div className="feedWrapper middle">
                 <Share/>
+                <br/>
                 {posts.map(post => <Post key={post.post_id} post={post}/>)}
             </div>
         </div>

@@ -1,9 +1,10 @@
-import {useState,useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {MoreVert} from "@mui/icons-material"
 
-import {getComments, addComment, deleteComment, editComment} from '../../api/comments';
-import {editPost, deletePost} from '../../api/post';
+import {addComment, deleteComment, editComment, getComments} from '../../api/comments';
+import {deletePost, editPost} from '../../api/post';
 import {addReaction} from '../../api/reaction';
+import {getProfile} from '../../api/profile';
 
 import "./post.css"
 
@@ -16,21 +17,56 @@ export default function Post({post}) {
         imageSrc = URL.createObjectURL(blob);
     }
 
+    const [newComment, setNewComment] = useState("");
     const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
     const [showOptions, setShowOptions] = useState(false);
     const [currentCommentId, setCurrentCommentId] = useState(null);
     const [editCommentText, setEditCommentText] = useState('');
     const [showPostOptions, setShowPostOptions] = useState(false);
     const [editPostText, setEditPostText] = useState('');
+    const [profilePicture, setProfilePicture] = useState('');
 
     useEffect(() => {
         // fetchComments(); // TODO: bug - auto load new comments
     }, [comments]);
 
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile(post.user);
+
+                const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
+                let binary = '';
+                if (byteArray) {
+                    const len = byteArray.byteLength;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                }
+                setProfilePicture(byteArray ? `data:image/jpeg;base64,${btoa(binary)}` : '/assets/avatar_default.jpg');
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProfile();
+    }, [post.user]);
+
     const fetchComments = async () => {
         if (post && post.post_id) {
-            const fetchedComments = await getComments(post.post_id);
+            let fetchedComments = await getComments(post.post_id);
+            for (let comment of fetchedComments) {
+                const profile = await getProfile(comment.user);
+                const byteArray = profile?.profile_picture ? new Uint8Array(profile.profile_picture.data) : null;
+                let binary = '';
+                if (byteArray) {
+                    const len = byteArray.byteLength;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                }
+                comment.profilePicture = byteArray ? `data:image/jpeg;base64,${btoa(binary)}` : '/assets/avatar_default.jpg';
+            }
             setComments(fetchedComments);
         } else {
             console.error('Post or post id is undefined');
@@ -69,9 +105,9 @@ export default function Post({post}) {
 
     const handleNewCommentSubmit = async (e) => {
         e.preventDefault();
-        await addComment(post.post_id, newComment);
-        setNewComment(prevComment => '');
-        await fetchComments();
+        const addedComment = await addComment(post.post_id, newComment);
+        setNewComment('');
+        setComments(prevComments => [...prevComments, addedComment]);
     };
 
     const handlePostOptions = () => {
@@ -114,7 +150,7 @@ export default function Post({post}) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
+                        <img className="postProfileImg" src={profilePicture} alt=""/>
                         <span className="postUsername">{post.user}</span>
                         <span className="postDate">{new Date(post.created).toDateString()}</span>
                     </div>
@@ -122,7 +158,8 @@ export default function Post({post}) {
                         <MoreVert onClick={handlePostOptions}/>
                         {showPostOptions && (
                             <div className="postOptionsPopup">
-                                <input type="text" value={editPostText} onChange={(e) => setEditPostText(e.target.value)} />
+                                <input type="text" value={editPostText}
+                                       onChange={(e) => setEditPostText(e.target.value)}/>
                                 <button onClick={handleEditPost}>Edit Post</button>
                                 <button onClick={handleDeletePost}>Delete Post</button>
                             </div>
@@ -130,12 +167,13 @@ export default function Post({post}) {
                     </div>
                 </div>
                 <div className="postCenter">
-                <span className="postText">{post.text}</span>
+                    <span className="postText">{post.text}</span>
                     {post.image && <img className="postImg" src={imageSrc} alt=""/>}
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img className="likeIcon" src="assets/like1.jpg" alt="" onClick={handleAddReaction}/> <span className="postlikeCounter">{post.likes_count} People like it</span>
+                        <img className="likeIcon" src="assets/like1.jpg" alt="" onClick={handleAddReaction}/> <span
+                        className="postlikeCounter">{post.likes_count} People like it</span>
                     </div>
                     <div className="postBottomRight">
                         <span className="postCommentText" onClick={fetchComments}>{post.comments_count} comments</span>
@@ -145,7 +183,7 @@ export default function Post({post}) {
                     <div key={comment.comment_id} className="comment">
                         <div className="postTop">
                             <div className="postTopLeft">
-                                <img className="postProfileImg" src="/assets/feed1.jpg" alt=""/>
+                                <img className="postProfileImg" src={comment.profilePicture} alt=""/>
                                 <span className="postUsername">{comment.user}</span>
                                 <span className="postDate">{new Date(comment.created).toDateString()}</span>
                             </div>
@@ -156,7 +194,8 @@ export default function Post({post}) {
                         <span>{comment.text}</span>
                         {currentCommentId === comment.comment_id && (
                             <div className="commentOptionsPopup">
-                                <input type="text" value={editCommentText} onChange={(e) => setEditCommentText(e.target.value)} />
+                                <input type="text" value={editCommentText}
+                                       onChange={(e) => setEditCommentText(e.target.value)}/>
                                 <button onClick={handleEditComment}>Change Comment</button>
                                 <button onClick={handleDeleteComment}>Delete Comment</button>
                             </div>

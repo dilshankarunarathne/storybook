@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useLocation,useHistory} from 'react-router-dom';
 
-import { resetPassword } from '../../api/users';
+import {resetPassword} from '../../api/users';
 
 import './reset.css';
 
 function ResetPassword() {
     const [code, setCode] = useState(null);
     const location = useLocation();
+    const history = useHistory();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -38,8 +39,11 @@ function ResetPassword() {
 
         try {
             await resetPassword(newPassword, code);
-            alert('Password has been reset successfully!');
+            alert('Password has been reset successfully! You will be redirected.');
             document.getElementById('resetForm').reset();
+            setTimeout(() => {
+                history.push('/login');
+            }, 1000);
         } catch (error) {
             alert('Error during password reset');
         }
@@ -54,9 +58,9 @@ function ResetPassword() {
 
                 <form id="resetForm">
                     <label htmlFor="newPassword">New Password</label>
-                    <input type="password" id="newPassword" name="newPassword" required />
+                    <input type="password" id="newPassword" name="newPassword" required/>
                     <label htmlFor="confirmPassword">Confirm New Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required />
+                    <input type="password" id="confirmPassword" name="confirmPassword" required/>
                     <button type="button" onClick={validatePassword}>Set Password</button>
                     <p className="error" id="errorMessage"></p>
                 </form>

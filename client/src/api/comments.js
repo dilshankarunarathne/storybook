@@ -57,7 +57,7 @@ export const deleteComment = async (commentId) => {
         throw new Error(`Error during comment deletion: ${message}`);
     }
 
-    return await response.json();
+    return await response.text();
 };
 
 export const editComment = async (commentId, newCommentText) => {
@@ -78,5 +78,5 @@ export const editComment = async (commentId, newCommentText) => {
         throw new Error(`Error during comment editing: ${message}`);
     }
 
-    return await response.json();
+    return await response.text();
 };
